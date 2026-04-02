@@ -1,7 +1,91 @@
+import { type FormEvent, useEffect, useMemo, useState } from 'react';
+import emailjs from '@emailjs/browser';
 import { Phone, Mail, MapPin, Facebook, Linkedin, Github } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+
+type ContactStatus =
+  | { type: 'success'; message: string }
+  | { type: 'error'; message: string }
+  | null;
 
 export function Contact() {
+  const receiverEmail = 'fuad.jemal.mail@gmail.com';
+
+  const emailjsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined;
+  const emailjsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined;
+  const emailjsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [sending, setSending] = useState(false);
+  const [status, setStatus] = useState<ContactStatus>(null);
+
+  const isConfigured = useMemo(
+    () => Boolean(emailjsServiceId && emailjsTemplateId && emailjsPublicKey),
+    [emailjsServiceId, emailjsTemplateId, emailjsPublicKey],
+  );
+
+  useEffect(() => {
+    if (!emailjsPublicKey) return;
+    emailjs.init(emailjsPublicKey);
+  }, [emailjsPublicKey]);
+
+  const validate = () => {
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedMessage = message.trim();
+
+    if (trimmedName.length < 2) return 'Please enter your name.';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) return 'Please enter a valid email address.';
+    if (trimmedMessage.length < 5) return 'Please enter your message (at least 5 characters).';
+    return null;
+  };
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (sending) return;
+
+    const validationError = validate();
+    if (validationError) {
+      setStatus({ type: 'error', message: validationError });
+      return;
+    }
+
+    if (!isConfigured) {
+      setStatus({
+        type: 'error',
+        message:
+          'Email service is not configured. Please set VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, and VITE_EMAILJS_PUBLIC_KEY.',
+      });
+      return;
+    }
+
+    setSending(true);
+    setStatus(null);
+
+    try {
+      await emailjs.send(emailjsServiceId!, emailjsTemplateId!, {
+        to_email: receiverEmail,
+        from_name: name.trim(),
+        from_email: email.trim(),
+        message: message.trim(),
+      });
+
+      setStatus({ type: 'success', message: 'Message sent successfully!' });
+      setName('');
+      setEmail('');
+      setMessage('');
+    } catch (err) {
+      setStatus({
+        type: 'error',
+        message: 'Failed to send message. Please try again in a moment.',
+      });
+    } finally {
+      setSending(false);
+    }
+  };
+
   return (
     <section id="contact" className="py-14 sm:py-20 md:py-24 bg-[#212428] border-t border-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
@@ -70,51 +154,71 @@ export function Contact() {
             viewport={{ once: true }}
             className="lg:col-span-7 bg-gradient-to-br from-[#1e2024] to-[#23272b] p-5 sm:p-8 md:p-10 rounded-xl sm:rounded-2xl shadow-2xl min-w-0 h-full"
           >
-            <form className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6" onSubmit={(e) => e.preventDefault()}>
+            <form className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6" onSubmit={onSubmit}>
               <div className="sm:col-span-1">
                 <label className="text-gray-400 text-xs uppercase font-semibold mb-2 sm:mb-3 block">
                   Your Name
                 </label>
                 <input
                   type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#ff014f] outline-none transition-all shadow-inner"
-                />
-              </div>
-              <div className="sm:col-span-1">
-                <label className="text-gray-400 text-xs uppercase font-semibold mb-2 sm:mb-3 block">
-                  Phone Number
-                </label>
-                <input
-                  type="text"
-                  className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#ff014f] outline-none transition-all shadow-inner"
+                  placeholder="Your name"
+                  autoComplete="name"
                 />
               </div>
               <div className="sm:col-span-2">
                 <label className="text-gray-400 text-xs uppercase font-semibold mb-2 sm:mb-3 block">Email</label>
                 <input
                   type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#ff014f] outline-none transition-all shadow-inner"
-                />
-              </div>
-              <div className="sm:col-span-2">
-                <label className="text-gray-400 text-xs uppercase font-semibold mb-2 sm:mb-3 block">Subject</label>
-                <input
-                  type="text"
-                  className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#ff014f] outline-none transition-all shadow-inner"
+                  placeholder="you@example.com"
+                  autoComplete="email"
                 />
               </div>
               <div className="sm:col-span-2">
                 <label className="text-gray-400 text-xs uppercase font-semibold mb-2 sm:mb-3 block">Message</label>
                 <textarea
                   rows={5}
+                  value={message}
+                  onChange={(e) => setMessage(e.target.value)}
                   className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#ff014f] outline-none transition-all shadow-inner resize-y min-h-[120px] sm:min-h-[150px]"
+                  placeholder="Write your message..."
                 />
               </div>
+
+              <div className="sm:col-span-2">
+                <AnimatePresence>
+                  {status && (
+                    <motion.div
+                      key={status.message}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 6 }}
+                      transition={{ duration: 0.18 }}
+                      className={`rounded-lg border px-4 py-3 text-sm ${
+                        status.type === 'success'
+                          ? 'bg-green-500/10 border-green-500/30 text-green-200'
+                          : 'bg-red-500/10 border-red-500/30 text-red-200'
+                      }`}
+                      role={status.type === 'success' ? 'status' : 'alert'}
+                      aria-live="polite"
+                    >
+                      {status.message}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               <button
                 type="submit"
-                className="sm:col-span-2 py-3 sm:py-4 rounded-lg bg-[#1e2024] shadow-2xl text-[#ff014f] text-sm sm:text-base font-bold uppercase tracking-widest hover:bg-[#ff014f] hover:text-white transition-all duration-300 mt-2"
+                className="sm:col-span-2 py-3 sm:py-4 rounded-lg bg-[#1e2024] shadow-2xl text-[#ff014f] text-sm sm:text-base font-bold uppercase tracking-widest hover:bg-[#ff014f] hover:text-white transition-all duration-300 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                disabled={sending}
               >
-                Send Message
+                {sending ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </motion.div>
