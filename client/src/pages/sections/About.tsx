@@ -26,7 +26,7 @@ export function About() {
             />
           </div>
           <div className="mt-4 w-fit max-w-full sm:max-w-none bg-[#891989] p-5 sm:p-8 rounded-xl sm:rounded-2xl shadow-xl flex sm:absolute sm:mt-0 sm:-bottom-6 sm:-right-6 sm:block items-center gap-4 sm:gap-0">
-            <p className="text-white font-bold text-3xl sm:text-4xl">03+</p>
+            <p className="text-white font-bold text-3xl sm:text-4xl">3+</p>
             <p className="text-white/80 text-xs uppercase tracking-widest sm:mt-2 leading-snug">
               Years Experience
             </p>
