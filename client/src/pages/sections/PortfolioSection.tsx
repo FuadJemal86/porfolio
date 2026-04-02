@@ -216,7 +216,7 @@ export function PortfolioSection() {
   return (
     <section id="portfolio" className="py-14 sm:py-20 md:py-24 bg-[#212428] border-t border-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-        <p className="text-[#ff014f] text-xs sm:text-sm uppercase tracking-widest mb-2 px-2">
+        <p className="text-[#891989] text-xs sm:text-sm uppercase tracking-widest mb-2 px-2">
           Visit my portfolio and keep your feedback
         </p>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-300 mb-10 sm:mb-16">My Portfolio</h2>
@@ -256,7 +256,7 @@ export function PortfolioSection() {
                 </div>
 
                 <div className="p-4 sm:p-6">
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-300 group-hover:text-[#ff014f] transition-colors">
+                  <h3 className="text-lg sm:text-xl font-bold text-gray-300 group-hover:text-[#891989] transition-colors">
                     {proj.title}
                   </h3>
                   <p className="text-gray-400 text-sm sm:text-base leading-relaxed mt-3 clamp-2">
@@ -315,7 +315,7 @@ export function PortfolioSection() {
                     setActiveFolder(null);
                     setFullscreenSrc(null);
                   }}
-                  className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#1e2024] border border-white/10 text-white hover:border-[#ff014f] transition-colors"
+                  className="shrink-0 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#1e2024] border border-white/10 text-white hover:border-[#891989] transition-colors"
                 >
                   X
                 </button>
@@ -359,7 +359,7 @@ export function PortfolioSection() {
                                 setActiveImageIndex(idx);
                               }}
                               className={`shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border transition-colors ${
-                                isActive ? 'border-[#ff014f]' : 'border-white/10 hover:border-white/20'
+                                isActive ? 'border-[#891989]' : 'border-white/10 hover:border-white/20'
                               } bg-[#0f1729]`}
                               aria-label={`Select image ${idx + 1}`}
                             >
@@ -377,7 +377,7 @@ export function PortfolioSection() {
 
                     {activeProject.technologies && activeProject.technologies.length > 0 && (
                       <div className="mt-6">
-                        <p className="text-[#ff014f] text-xs uppercase tracking-widest mb-3">Technologies</p>
+                        <p className="text-[#891989] text-xs uppercase tracking-widest mb-3">Technologies</p>
                         <div className="flex flex-wrap gap-2">
                           {activeProject.technologies.map((t) => (
                             <span
@@ -398,7 +398,7 @@ export function PortfolioSection() {
                             href={activeProject.liveUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-[#1e2024] border border-white/10 hover:border-[#ff014f] transition-colors text-[#ff014f] font-bold text-sm"
+                            className="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-[#1e2024] border border-white/10 hover:border-[#891989] transition-colors text-[#891989] font-bold text-sm"
                           >
                             View Live Project
                           </a>
@@ -408,7 +408,7 @@ export function PortfolioSection() {
                             href={activeProject.githubUrl}
                             target="_blank"
                             rel="noreferrer"
-                            className="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-[#1e2024] border border-white/10 hover:border-[#ff014f] transition-colors text-[#ff014f] font-bold text-sm"
+                            className="inline-flex items-center justify-center px-5 py-3 rounded-xl bg-[#1e2024] border border-white/10 hover:border-[#891989] transition-colors text-[#891989] font-bold text-sm"
                           >
                             GitHub Repo
                           </a>
@@ -447,7 +447,7 @@ export function PortfolioSection() {
                 type="button"
                 aria-label="Close full screen image"
                 onClick={() => setFullscreenSrc(null)}
-                className="absolute -top-3 -right-3 z-10 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#1e2024] border border-white/10 text-white hover:border-[#ff014f] transition-colors"
+                className="absolute -top-3 -right-3 z-10 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#1e2024] border border-white/10 text-white hover:border-[#891989] transition-colors"
               >
                 X
               </button>

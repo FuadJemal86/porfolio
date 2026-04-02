@@ -5,7 +5,7 @@ import fuadpp from '../image/fuadpp.jpg';
 
 function ProfileRing({ className = '' }: { className?: string }) {
   return (
-    <div className={`relative z-10 rounded-full border-[3px] sm:border-4 border-[#ff014f] p-2 sm:p-4 max-w-[min(88vw,420px)] ${className}`}>
+    <div className={`relative z-10 rounded-full border-[3px] sm:border-4 border-[#891989] p-2 sm:p-4 max-w-[min(88vw,420px)] ${className}`}>
       <div className="aspect-square w-[min(82vw,380px)] sm:w-[min(70vw,420px)] md:w-[min(45vw,420px)] max-w-full mx-auto rounded-full overflow-hidden">
         <img src={fuadpp} alt="Fuad Jemal" className="w-full h-full object-cover" />
       </div>
@@ -86,13 +86,13 @@ export function Hero() {
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-[1.15]">
-            Hi, I&apos;m <span className="text-[#ff014f]">Fuad Jemal</span>
+            Hi, I&apos;m <span className="text-[#891989]">Fuad Jemal</span>
             <br />
             <span className="block mt-2 sm:mt-0 sm:inline sm:ml-0 text-2xl sm:text-4xl md:text-5xl leading-[1.2]">
-              <span className="bg-gradient-to-r from-[#ff014f] via-[#ff014f] to-[#5eb3f6] bg-clip-text text-transparent font-semibold break-words">
+              <span className="bg-gradient-to-r from-[#891989] via-[#891989] to-[#5eb3f6] bg-clip-text text-transparent font-semibold break-words">
                 {typingText}
               </span>
-              <span className="ml-1 text-[#ff014f] animate-pulse" aria-hidden="true">
+              <span className="ml-1 text-[#891989] animate-pulse" aria-hidden="true">
                 |
               </span>
             </span>
@@ -106,13 +106,13 @@ export function Hero() {
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mt-6 sm:mt-4 w-full sm:w-auto">
             <a
               href="#portfolio"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#1e2024] border border-white/10 text-[#ff014f] font-bold text-sm hover:border-[#ff014f] transition-colors w-full sm:w-auto"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#1e2024] border border-white/10 text-[#891989] font-bold text-sm hover:border-[#891989] transition-colors w-full sm:w-auto"
             >
               View Projects
             </a>
             <a
               href="#contact"
-              className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#ff014f] border border-[#ff014f] text-white font-bold text-sm hover:bg-[#d70043] transition-colors w-full sm:w-auto"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#891989] border border-[#891989] text-white font-bold text-sm hover:bg-[#6f146f] transition-colors w-full sm:w-auto"
             >
               Contact Me
             </a>
@@ -121,14 +121,14 @@ export function Hero() {
           <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 justify-items-center sm:justify-items-start">
             <div className="flex flex-col items-center sm:items-start">
               <p className="text-gray-400 text-xs uppercase tracking-widest mb-3 sm:mb-4">
-                Find with me
+                Find me
               </p>
               <div className="flex gap-3 sm:gap-4">
                 {[<Github key="g" />, <Linkedin key="l" />, <Globe key="w" />].map((icon, i) => (
                   <button
                     key={i}
                     type="button"
-                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-white hover:text-[#ff014f] hover:-translate-y-1 transition-all"
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-white hover:text-[#891989] hover:-translate-y-1 transition-all"
                   >
                     {icon}
                   </button>
@@ -143,7 +143,7 @@ export function Hero() {
                 {[<Code2 key="c" />, <Database key="d" />, 'JS'].map((skill, i) => (
                   <div
                     key={i}
-                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-[#ff014f] font-bold text-sm sm:text-base"
+                    className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-[#891989] font-bold text-sm sm:text-base"
                   >
                     {skill}
                   </div>
