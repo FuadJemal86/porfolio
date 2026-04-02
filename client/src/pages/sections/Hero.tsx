@@ -1,3 +1,4 @@
+import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Linkedin, Code2, Database, Globe } from 'lucide-react';
 import fuadpp from '../image/fuadpp.jpg';
@@ -13,6 +14,50 @@ function ProfileRing({ className = '' }: { className?: string }) {
 }
 
 export function Hero() {
+  const phrases = useMemo(
+    () => ['Full Stack Web Developer', 'Software Engineer', 'Problem Solver'],
+    [],
+  );
+
+  const [phraseIndex, setPhraseIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const typingText = useMemo(() => {
+    const phrase = phrases[phraseIndex] ?? '';
+    return phrase.slice(0, charIndex);
+  }, [charIndex, phraseIndex, phrases]);
+
+  useEffect(() => {
+    const phrase = phrases[phraseIndex] ?? '';
+    const typingSpeed = 55;
+    const deletingSpeed = 35;
+
+    let delay = isDeleting ? deletingSpeed : typingSpeed;
+
+    // Pause after completing a phrase
+    if (!isDeleting && charIndex === phrase.length) delay = 900;
+    // Pause briefly after deletion
+    if (isDeleting && charIndex === 0) delay = 350;
+
+    const t = window.setTimeout(() => {
+      if (!isDeleting && charIndex === phrase.length) {
+        setIsDeleting(true);
+        return;
+      }
+
+      if (isDeleting && charIndex === 0) {
+        setIsDeleting(false);
+        setPhraseIndex((i) => (i + 1) % phrases.length);
+        return;
+      }
+
+      setCharIndex((i) => i + (isDeleting ? -1 : 1));
+    }, delay);
+
+    return () => window.clearTimeout(t);
+  }, [charIndex, isDeleting, phraseIndex, phrases]);
+
   return (
     <section
       id="home"
@@ -43,8 +88,13 @@ export function Hero() {
           <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-[1.15]">
             Hi, I&apos;m <span className="text-[#ff014f]">Fuad Jemal</span>
             <br />
-            <span className="text-2xl sm:text-4xl md:text-5xl block mt-2 sm:mt-0 sm:inline sm:ml-0">
-              a Full Stack Developer.
+            <span className="block mt-2 sm:mt-0 sm:inline sm:ml-0 text-2xl sm:text-4xl md:text-5xl leading-[1.2]">
+              <span className="bg-gradient-to-r from-[#ff014f] via-[#ff014f] to-[#5eb3f6] bg-clip-text text-transparent font-semibold break-words">
+                {typingText}
+              </span>
+              <span className="ml-1 text-[#ff014f] animate-pulse" aria-hidden="true">
+                |
+              </span>
             </span>
           </h1>
           <p className="text-gray-400 text-base sm:text-lg leading-relaxed mb-8 sm:mb-10 max-w-lg mx-auto lg:mx-0">
@@ -53,8 +103,23 @@ export function Hero() {
             Focused on building efficient, secure, and real-world software solutions.
           </p>
 
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center lg:justify-start gap-8 sm:gap-10">
-            <div className="flex flex-col items-center lg:items-start">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start mt-6 sm:mt-4 w-full sm:w-auto">
+            <a
+              href="#portfolio"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#1e2024] border border-white/10 text-[#ff014f] font-bold text-sm hover:border-[#ff014f] transition-colors w-full sm:w-auto"
+            >
+              View Projects
+            </a>
+            <a
+              href="#contact"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#ff014f] border border-[#ff014f] text-white font-bold text-sm hover:bg-[#d70043] transition-colors w-full sm:w-auto"
+            >
+              Contact Me
+            </a>
+          </div>
+
+          <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 justify-items-center sm:justify-items-start">
+            <div className="flex flex-col items-center sm:items-start">
               <p className="text-gray-400 text-xs uppercase tracking-widest mb-3 sm:mb-4">
                 Find with me
               </p>
@@ -70,7 +135,7 @@ export function Hero() {
                 ))}
               </div>
             </div>
-            <div className="flex flex-col items-center lg:items-start">
+            <div className="flex flex-col items-center sm:items-start">
               <p className="text-gray-400 text-xs uppercase tracking-widest mb-3 sm:mb-4">
                 Best Skill on
               </p>

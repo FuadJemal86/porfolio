@@ -1,6 +1,9 @@
 export function MyResume() {
   const skillGroups = [
-    { title: 'Backend', skills: ['Django', 'Node.js', 'REST APIs', 'Auth Systems'] },
+    {
+      title: 'Backend',
+      skills: ['Django', 'Node.js', 'REST APIs', 'Auth Systems', 'Docker', 'CI/CD'],
+    },
     { title: 'Frontend', skills: ['React.js', 'Tailwind', 'Formik', 'Dynamic UI'] },
     { title: 'Databases', skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Prisma'] },
   ];
@@ -8,7 +11,7 @@ export function MyResume() {
   return (
     <section id="resume" className="py-14 sm:py-20 md:py-24 bg-[#212428] border-t border-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 text-center">
-        <p className="text-[#ff014f] text-xs sm:text-sm uppercase tracking-widest mb-2">2+ Years of Experience</p>
+        <p className="text-[#ff014f] text-xs sm:text-sm uppercase tracking-widest mb-2">3+ Years of Experience</p>
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-300 mb-10 sm:mb-16">My Resume</h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-8">

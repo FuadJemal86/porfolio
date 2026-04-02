@@ -15,15 +15,8 @@ export function Contact() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-5 bg-gradient-to-br from-[#1e2024] to-[#23272b] p-5 sm:p-8 rounded-xl sm:rounded-2xl shadow-2xl"
+            className="lg:col-span-5 bg-gradient-to-br from-[#1e2024] to-[#23272b] p-5 sm:p-8 md:p-10 rounded-xl sm:rounded-2xl shadow-2xl flex flex-col h-full"
           >
-            <div className="rounded-xl overflow-hidden mb-6 sm:mb-8">
-              <img
-                src="https://images.unsplash.com/photo-1516387792267-308f2538eda7?w=600&q=80"
-                alt="Contact"
-                className="w-full h-40 sm:h-52 object-cover hover:scale-110 transition-transform duration-500"
-              />
-            </div>
             <h3 className="text-2xl sm:text-3xl font-bold text-gray-300 mb-2">Fuad Jemal</h3>
             <p className="text-gray-400 mb-4 sm:mb-6 uppercase tracking-widest text-xs sm:text-sm">
               Full Stack Developer
@@ -75,7 +68,7 @@ export function Contact() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-7 bg-gradient-to-br from-[#1e2024] to-[#23272b] p-5 sm:p-8 md:p-10 rounded-xl sm:rounded-2xl shadow-2xl min-w-0"
+            className="lg:col-span-7 bg-gradient-to-br from-[#1e2024] to-[#23272b] p-5 sm:p-8 md:p-10 rounded-xl sm:rounded-2xl shadow-2xl min-w-0 h-full"
           >
             <form className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6" onSubmit={(e) => e.preventDefault()}>
               <div className="sm:col-span-1">

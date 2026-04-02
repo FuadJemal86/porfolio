@@ -37,12 +37,12 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12 lg:gap-8 mb-12 sm:mb-16 text-left">
           <div className="flex flex-col gap-4 sm:gap-6 items-start">
-            <div className="flex items-center gap-3">
+            {/* <div className="flex items-center gap-3">
               <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-[#ff014f] to-[#ec1c24] flex items-center justify-center text-white font-bold text-lg sm:text-xl shadow-lg shrink-0">
                 F
               </div>
               <span className="text-white font-bold text-xl sm:text-2xl tracking-tight">FUAD JEMAL</span>
-            </div>
+            </div> */}
             <p className="text-gray-400 leading-relaxed text-sm max-w-sm">
               Building scalable, secure, and modern digital experiences with Django, MERN, and a passion for clean
               architecture.
@@ -92,7 +92,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="pt-8 sm:pt-10 border-t border-gray-800/50 text-center sm:text-left px-0">
+        <div className="pt-8 sm:pt-10 border-t border-gray-800/50 text-center px-0">
           <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
             © {new Date().getFullYear()}. All rights reserved by{' '}
             <span className="text-[#ff014f] font-semibold">Fuad Jemal</span>.
