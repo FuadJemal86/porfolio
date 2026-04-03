@@ -59,7 +59,7 @@ export function Header() {
               <li key={label}>
                 <a
                   href={href}
-                  className="text-gray-400 hover:text-[#891989] text-xs font-semibold uppercase tracking-widest transition-colors"
+                  className="text-gray-400 hover:text-[#8b5cf6] text-xs font-semibold uppercase tracking-widest transition-colors"
                 >
                   {label}
                 </a>
@@ -71,7 +71,7 @@ export function Header() {
             <a
               href="#contact"
               onClick={closeMenu}
-              className="hidden sm:inline-flex px-4 lg:px-6 py-2 rounded-md bg-[#1e2024] shadow-lg text-[#891989] text-xs sm:text-sm font-bold border border-transparent hover:border-[#891989] transition-all"
+              className="hidden sm:inline-flex px-4 lg:px-6 py-2 rounded-md bg-[#1e2024] shadow-lg text-[#8b5cf6] text-xs sm:text-sm font-bold border border-transparent hover:border-[#8b5cf6] transition-all"
             >
               HIRE ME
             </a>
@@ -96,7 +96,7 @@ export function Header() {
                   <a
                     href={href}
                     onClick={closeMenu}
-                    className="block py-3 px-3 rounded-lg text-gray-300 hover:text-[#891989] hover:bg-white/5 text-sm font-semibold uppercase tracking-widest transition-colors"
+                    className="block py-3 px-3 rounded-lg text-gray-300 hover:text-[#8b5cf6] hover:bg-white/5 text-sm font-semibold uppercase tracking-widest transition-colors"
                   >
                     {label}
                   </a>
@@ -106,7 +106,7 @@ export function Header() {
                 <a
                   href="#contact"
                   onClick={closeMenu}
-                  className="block text-center py-3 rounded-md bg-[#1e2024] text-[#891989] text-sm font-bold border border-transparent"
+                  className="block text-center py-3 rounded-md bg-[#1e2024] text-[#8b5cf6] text-sm font-bold border border-transparent"
                 >
                   HIRE ME
                 </a>

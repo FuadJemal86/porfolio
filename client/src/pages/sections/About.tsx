@@ -25,7 +25,7 @@ export function About() {
               className="w-full h-[220px] sm:h-[320px] md:h-[420px] lg:h-[500px] object-cover"
             />
           </div>
-          <div className="mt-4 w-fit max-w-full sm:max-w-none bg-[#891989] p-5 sm:p-8 rounded-xl sm:rounded-2xl shadow-xl flex sm:absolute sm:mt-0 sm:-bottom-6 sm:-right-6 sm:block items-center gap-4 sm:gap-0">
+          <div className="mt-4 w-fit max-w-full sm:max-w-none bg-[#8b5cf6] p-5 sm:p-8 rounded-xl sm:rounded-2xl shadow-xl flex sm:absolute sm:mt-0 sm:-bottom-6 sm:-right-6 sm:block items-center gap-4 sm:gap-0">
             <p className="text-white font-bold text-3xl sm:text-4xl">3+</p>
             <p className="text-white/80 text-xs uppercase tracking-widest sm:mt-2 leading-snug">
               Years Experience
@@ -39,7 +39,7 @@ export function About() {
           viewport={{ once: true }}
           className="order-1 lg:order-2 text-left"
         >
-          <p className="text-[#891989] text-xs sm:text-sm uppercase tracking-widest mb-2">My Story</p>
+          <p className="text-[#8b5cf6] text-xs sm:text-sm uppercase tracking-widest mb-2">My Story</p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-300 mb-4 sm:mb-6">
             About Me
           </h2>
@@ -57,7 +57,7 @@ export function About() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-left">
             {points.map((point, i) => (
               <div key={i} className="flex items-start gap-2 sm:gap-3 text-gray-300">
-                <CheckCircle2 className="text-[#891989] shrink-0 mt-0.5" size={20} />
+                <CheckCircle2 className="text-[#8b5cf6] shrink-0 mt-0.5" size={20} />
                 <span className="text-sm font-medium leading-snug">{point}</span>
               </div>
             ))}

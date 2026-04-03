@@ -90,7 +90,7 @@ export function Contact() {
     <section id="contact" className="py-14 sm:py-20 md:py-24 bg-[#212428] border-t border-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="text-center mb-10 sm:mb-16">
-          <p className="text-[#891989] text-xs sm:text-sm uppercase tracking-widest mb-2">Contact</p>
+          <p className="text-[#8b5cf6] text-xs sm:text-sm uppercase tracking-widest mb-2">Contact</p>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-300">Contact Me</h2>
         </div>
 
@@ -111,7 +111,7 @@ export function Contact() {
 
             <div className="space-y-3 sm:space-y-4 mb-8 sm:mb-10">
               <div className="flex items-center gap-3 sm:gap-4 text-gray-400 min-w-0">
-                <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-lg bg-[#1a1c20] shadow-xl flex items-center justify-center text-[#891989]">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-lg bg-[#1a1c20] shadow-xl flex items-center justify-center text-[#8b5cf6]">
                   <Phone size={18} className="sm:w-5 sm:h-5" />
                 </div>
                 <a href="tel:+251902920301" className="text-sm sm:text-base break-all">
@@ -119,7 +119,7 @@ export function Contact() {
                 </a>
               </div>
               <div className="flex items-center gap-3 sm:gap-4 text-gray-400 min-w-0">
-                <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-lg bg-[#1a1c20] shadow-xl flex items-center justify-center text-[#891989]">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-lg bg-[#1a1c20] shadow-xl flex items-center justify-center text-[#8b5cf6]">
                   <Mail size={18} className="sm:w-5 sm:h-5" />
                 </div>
                 <a href="mailto:fuad.jemal.mail@gmail.com" className="text-sm sm:text-base break-all">
@@ -127,7 +127,7 @@ export function Contact() {
                 </a>
               </div>
               <div className="flex items-start gap-3 sm:gap-4 text-gray-400 text-sm sm:text-base">
-                <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-lg bg-[#1a1c20] shadow-xl flex items-center justify-center text-[#891989] mt-0.5">
+                <div className="w-11 h-11 sm:w-12 sm:h-12 shrink-0 rounded-lg bg-[#1a1c20] shadow-xl flex items-center justify-center text-[#8b5cf6] mt-0.5">
                   <MapPin size={18} className="sm:w-5 sm:h-5" />
                 </div>
                 <span>Addis Ababa, Ethiopia</span>
@@ -140,7 +140,7 @@ export function Contact() {
                 <button
                   key={i}
                   type="button"
-                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-white hover:text-[#891989] hover:-translate-y-1 transition-all"
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-white hover:text-[#8b5cf6] hover:-translate-y-1 transition-all"
                 >
                   {icon}
                 </button>
@@ -163,7 +163,7 @@ export function Contact() {
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#891989] outline-none transition-all shadow-inner"
+                  className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#8b5cf6] outline-none transition-all shadow-inner"
                   placeholder="Your name"
                   autoComplete="name"
                 />
@@ -174,7 +174,7 @@ export function Contact() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#891989] outline-none transition-all shadow-inner"
+                  className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#8b5cf6] outline-none transition-all shadow-inner"
                   placeholder="you@example.com"
                   autoComplete="email"
                 />
@@ -185,7 +185,7 @@ export function Contact() {
                   rows={5}
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
-                  className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#891989] outline-none transition-all shadow-inner resize-y min-h-[120px] sm:min-h-[150px]"
+                  className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#8b5cf6] outline-none transition-all shadow-inner resize-y min-h-[120px] sm:min-h-[150px]"
                   placeholder="Write your message..."
                 />
               </div>
@@ -215,7 +215,7 @@ export function Contact() {
 
               <button
                 type="submit"
-                className="sm:col-span-2 py-3 sm:py-4 rounded-lg bg-[#1e2024] shadow-2xl text-[#891989] text-sm sm:text-base font-bold uppercase tracking-widest hover:bg-[#891989] hover:text-white transition-all duration-300 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                className="sm:col-span-2 py-3 sm:py-4 rounded-lg bg-[#1e2024] shadow-2xl text-[#8b5cf6] text-sm sm:text-base font-bold uppercase tracking-widest hover:bg-[#8b5cf6] hover:text-white transition-all duration-300 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
                 disabled={sending}
               >
                 {sending ? 'Sending...' : 'Send Message'}

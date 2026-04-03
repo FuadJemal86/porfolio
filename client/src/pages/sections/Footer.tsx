@@ -29,7 +29,7 @@ export function Footer() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#1e2024] shadow-2xl flex items-center justify-center text-[#891989] border border-gray-800 hover:border-[#891989] transition-colors"
+        className="fixed bottom-6 right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#1e2024] shadow-2xl flex items-center justify-center text-[#8b5cf6] border border-gray-800 hover:border-[#8b5cf6] transition-colors"
       >
         <ArrowUp size={22} className="sm:w-6 sm:h-6" />
       </motion.button>
@@ -38,7 +38,7 @@ export function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12 lg:gap-8 mb-12 sm:mb-16 text-left">
           <div className="flex flex-col gap-4 sm:gap-6 items-start">
             {/* <div className="flex items-center gap-3">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-[#891989] to-[#ec1c24] flex items-center justify-center text-white font-bold text-lg sm:text-xl shadow-lg shrink-0">
+              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-[#8b5cf6] to-[#ec1c24] flex items-center justify-center text-white font-bold text-lg sm:text-xl shadow-lg shrink-0">
                 F
               </div>
               <span className="text-white font-bold text-xl sm:text-2xl tracking-tight">FUAD JEMAL</span>
@@ -52,7 +52,7 @@ export function Footer() {
                 <a
                   key={i}
                   href={social.href}
-                  className="w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-gray-400 hover:text-[#891989] hover:-translate-y-1 transition-all duration-300"
+                  className="w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-gray-400 hover:text-[#8b5cf6] hover:-translate-y-1 transition-all duration-300"
                 >
                   {social.icon}
                 </a>
@@ -61,7 +61,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-[#891989] text-sm uppercase tracking-[2px] font-bold mb-6 sm:mb-8">Quick Links</h4>
+            <h4 className="text-[#8b5cf6] text-sm uppercase tracking-[2px] font-bold mb-6 sm:mb-8">Quick Links</h4>
             <ul className="space-y-3 sm:space-y-4">
               {footerLinks.map(({ label, href }) => (
                 <li key={label}>
@@ -70,7 +70,7 @@ export function Footer() {
                     className="text-gray-400 hover:text-white transition-colors relative group inline-block"
                   >
                     <span className="relative z-10">{label}</span>
-                    <span className="absolute bottom-0 left-0 w-0 h-px bg-[#891989] transition-all group-hover:w-full" />
+                    <span className="absolute bottom-0 left-0 w-0 h-px bg-[#8b5cf6] transition-all group-hover:w-full" />
                   </a>
                 </li>
               ))}
@@ -78,10 +78,10 @@ export function Footer() {
           </div>
 
           <div className="sm:col-span-2 lg:col-span-1">
-            <h4 className="text-[#891989] text-sm uppercase tracking-[2px] font-bold mb-6 sm:mb-8">Get In Touch</h4>
+            <h4 className="text-[#8b5cf6] text-sm uppercase tracking-[2px] font-bold mb-6 sm:mb-8">Get In Touch</h4>
             <div className="space-y-3 sm:space-y-4 text-gray-400 text-sm">
               <p className="flex items-start justify-start gap-3 min-w-0">
-                <Mail size={16} className="text-[#891989] shrink-0 mt-0.5" />
+                <Mail size={16} className="text-[#8b5cf6] shrink-0 mt-0.5" />
                 <a href="mailto:fuad.jemal.mail@gmail.com" className="break-all">
                   fuad.jemal.mail@gmail.com
                 </a>
@@ -95,7 +95,7 @@ export function Footer() {
         <div className="pt-8 sm:pt-10 border-t border-gray-800/50 text-center px-0">
           <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
             © {new Date().getFullYear()}. All rights reserved by{' '}
-            <span className="text-[#891989] font-semibold">Fuad Jemal</span>.
+            <span className="text-[#8b5cf6] font-semibold">Fuad Jemal</span>.
           </p>
         </div>
       </div>
