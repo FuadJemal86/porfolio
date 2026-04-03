@@ -59,114 +59,135 @@ type PortfolioProject = {
   githubUrl?: string;
 };
 
+const defaultStack = [
+  'React',
+  'TypeScript',
+  'Node.js',
+  'Express.js',
+  'Prisma',
+  'shadcn/ui',
+  'UI Design',
+] as const;
+
 const projects: PortfolioProject[] = [
   {
     folder: 'A_sync',
     title: 'A Sync',
-    shortDescription: 'A clean management experience designed for faster workflows and clearer progress.',
+    shortDescription: 'Marketing site for a tech startup clear story, modern layout, and fast first impression.',
     fullDescription:
-      'A Sync is built around one idea: make everyday operations feel simple. The project focuses on clean UI structure, consistent state handling, and a smooth user journey across modules so teams can move from “start” to “done” without friction. I focused on readable components, thoughtful spacing, and practical interactions that feel natural on both desktop and mobile.',
+      'A_sync is a web presence built for a technology startup. It highlights the product story, team, and value proposition with a polished, responsive layout so visitors quickly understand what the company does and why it matters.',
     imageAlt: 'A Sync project screenshot',
-    technologies: ['React', 'Tailwind', 'API Integration', 'Responsive UI'],
+    technologies: [...defaultStack],
   },
   {
     folder: 'alif',
     title: 'Alif',
-    shortDescription: 'Education-focused UI for organizing learning content and tracking progress.',
+    shortDescription: 'School system for teachers and students attendance, grades, and results in one place.',
     fullDescription:
-      'Alif brings structure to learning. This project emphasizes clean layouts, user-friendly navigation, and content-first presentation. The goal is to help students and admins quickly find what they need, while keeping the interface modern, minimal, and easy to maintain.',
+      'Alif is a school management platform where teachers and students sign in with distinct roles. Teachers record attendance, release grades, and manage assessments; students log in to view their results and academic progress in a structured, easy-to-read interface.',
     imageAlt: 'Alif project screenshot',
-    technologies: ['React', 'Component Design', 'Responsive Layout'],
+    technologies: [...defaultStack],
   },
   {
     folder: 'aquaErp',
     title: 'Aqua ERP',
-    shortDescription: 'An ERP-style system built for practical business operations and reporting.',
+    shortDescription:
+      'Full ERP for inventory, sales, purchases, and credit control with alerts, overdue tracking, and notifications.',
     fullDescription:
-      'Aqua ERP is designed to support real operations: organized data, consistent screens, and a user experience that makes complex processes feel understandable. I paid attention to the “story” of the app—how users navigate from overview to details—while keeping the UI calm and professional.',
+      'Aqua ERP is a comprehensive system for managing inventory, products, sales, purchases, and credit control. It supports overdue tracking, low-stock alerts, and automated notifications so operations stay visible, predictable, and under control from day to day.',
     imageAlt: 'Aqua ERP project screenshot',
-    technologies: ['ERP Modules', 'Dashboards', 'API-Driven UI'],
+    technologies: [...defaultStack],
   },
   {
     folder: 'EmployeeManegment',
     title: 'Employee Management',
-    shortDescription: 'A structured platform for employee data with clear flows and clean presentation.',
+    shortDescription: 'HR operations: clock in/out, tasks on a calendar, progress tracking, and payroll.',
     fullDescription:
-      'This project focuses on employee management with a strong emphasis on clarity. The interface is designed to reduce confusion, make key information easy to scan, and keep interactions predictable. The result is a modern UI that feels efficient for everyday use.',
+      'A workforce portal for clock-in and clock-out, assigning tasks with calendar-based scheduling, monitoring progress over time, and supporting payroll workflows. It keeps managers and staff aligned on who is working on what and how work is advancing.',
     imageAlt: 'Employee Management project screenshot',
-    technologies: ['Data Views', 'Forms', 'Responsive UX'],
+    technologies: [...defaultStack],
   },
   {
     folder: 'family',
-    title: 'Family',
-    shortDescription: 'A personal web experience that keeps important content organized and accessible.',
+    title: 'Locality',
+    shortDescription: 'Locality-based family platform for registration, members, and community services.',
     fullDescription:
-      'Family is a personal-feel web application designed to keep important information organized. I aimed for a minimal UI with smooth spacing, readable typography, and a layout that makes browsing feel comfortable—especially on small screens.',
-    imageAlt: 'Family project screenshot',
-    technologies: ['Frontend UI', 'Clean Components', 'Responsive Design'],
+      'Locality (family system) is a locality-based family management platform. It simplifies family registration, tracks members, and connects users to community services bringing administrative work into one coherent, accessible web experience.',
+    imageAlt: 'Locality family platform screenshot',
+    technologies: [...defaultStack],
   },
   {
     folder: 'hikma',
-    title: 'Hikma',
-    shortDescription: 'A modern interface for system features with an elegant, focused layout.',
+    title: 'Hikma University',
+    shortDescription: 'Islamic university website—multilingual content, institutional story, and donations.',
     fullDescription:
-      'Hikma is all about focused user experience. The design stays minimal while still giving enough structure for users to understand where they are and what to do next. I paid attention to visual hierarchy, spacing, and interaction feedback for a calm “portfolio-level” feel.',
-    imageAlt: 'Hikma project screenshot',
-    technologies: ['UX Hierarchy', 'UI Consistency', 'Responsive Web'],
+      'A web platform for Hikma Islamic University that presents programs, values, and campus life. Content is available in three languages, and the site includes a donation flow so supporters can contribute to the university’s mission directly online.',
+    imageAlt: 'Hikma University project screenshot',
+    technologies: [...defaultStack],
   },
   {
     folder: 'homeCliener',
     title: 'Home Cleaner',
-    shortDescription: 'A service-oriented platform with a clean booking and browsing experience.',
+    shortDescription: 'Booking for home cleaning location, home details, and online requests.',
     fullDescription:
-      'Home Cleaner is designed around services and scheduling. The UI aims to be simple and inviting, with card-based sections and clear action areas. The project balances modern styling with practical functionality so customers can browse and book quickly.',
+      'Home Cleaner helps clients request cleaning services online. Customers specify where the home is located and what they need—rooms, beds, bathrooms, and other details—so providers can quote and schedule jobs without back-and-forth confusion.',
     imageAlt: 'Home Cleaner project screenshot',
-    technologies: ['Service Cards', 'Responsive UI', 'Clean Navigation'],
+    technologies: [...defaultStack],
   },
   {
     folder: 'jejan',
-    title: 'Jejan E-Commerce',
-    shortDescription: 'An e-commerce experience centered on product discovery and smooth checkout flow.',
+    title: 'Jejan',
+    shortDescription: 'E-commerce linking customers and suppliers for listings, orders, and exchanges.',
     fullDescription:
-      'Jejan is built with a focus on product discovery and clean presentation. The UI design is structured to help users explore items comfortably, understand details quickly, and move forward with confidence. I built this with a portfolio mindset: strong visuals, readable content, and careful spacing.',
-    imageAlt: 'Jejan E-Commerce project screenshot',
-    technologies: ['E-Commerce UI', 'Product Cards', 'Responsive Layout'],
+      'Jejan is an e-commerce platform that connects customers with suppliers. It supports seamless online transactions, product discovery, and exchanges so both sides can trade efficiently through a single, modern marketplace experience.',
+    imageAlt: 'Jejan e-commerce project screenshot',
+    technologies: [...defaultStack],
   },
   {
     folder: 'Kpi',
-    title: 'KPI',
-    shortDescription: 'KPI tracking visuals with an emphasis on readability and clean data presentation.',
+    title: 'KPI Assign',
+    shortDescription: 'SaaS for staff KPIs assign tasks, track completion with checks, and measure progress.',
     fullDescription:
-      'The KPI project focuses on making important metrics easy to understand. The UI is kept minimal, with hierarchy and spacing that guide attention. I aimed for a dashboard-like structure without making it feel heavy—clean cards and readable typography.',
-    imageAlt: 'KPI project screenshot',
-    technologies: ['Metrics Layout', 'Readable UI', 'Cards & Tables'],
+      'KPI Assign is a SaaS product for assigning work to staff, giving each person a “My KPI” view, and letting them mark tasks done with check/uncheck interactions. The system evaluates progress from completed items and integrates cleanly into broader organizational workflows.',
+    imageAlt: 'KPI Assign project screenshot',
+    technologies: [...defaultStack],
   },
   {
     folder: 'mishkat',
     title: 'Mishkat',
-    shortDescription: 'A web app interface with a thoughtful structure and consistent visual rhythm.',
+    shortDescription:
+      'Telegram library bot plus dashboard materials by year, semester, and department; easy access for students.',
     fullDescription:
-      'Mishkat is about consistent structure and a modern feel. The interface uses clean component patterns, clear navigation, and comfortable text presentation. The result is a professional portfolio-style experience that stays easy to use.',
+      'Mishkat is a Telegram-based library bot that organizes academic materials by year, semester, and department so students can find resources quickly. A web dashboard handles uploading and managing content, keeping the library accurate and up to date.',
     imageAlt: 'Mishkat project screenshot',
-    technologies: ['Component System', 'Responsive UI', 'Clean Typography'],
+    technologies: [
+      'Python',
+      'Telegram Bot API',
+      'React',
+      'TypeScript',
+      'Express.js',
+      'Prisma',
+      'shadcn/ui',
+      'UI Design',
+    ],
   },
   {
     folder: 'wcsh',
     title: 'WCSH',
-    shortDescription: 'A management-focused platform built with clarity, speed, and a clean UI mindset.',
+    shortDescription: 'Hospital website covering services, departments, and visitor information end to end.',
     fullDescription:
-      'WCSH is designed to make management workflows feel clear and organized. The UI keeps attention on actions and essential information, with a calm visual style and careful spacing. The goal is a professional project experience that looks great on any screen size.',
-    imageAlt: 'WCSH project screenshot',
-    technologies: ['Management UI', 'Workflow Design', 'Responsive UX'],
+      'WCSH is a hospital web presence that explains services, facilities, and how to get care. The site is structured so patients and families can learn about the institution, find practical information, and navigate content confidently on any device.',
+    imageAlt: 'WCSH hospital website screenshot',
+    technologies: [...defaultStack],
   },
   {
     folder: 'pm',
-    title: 'PM',
-    shortDescription: 'A personal project focused on clean structure, smooth UX, and clear presentation.',
+    title: 'Property Management',
+    shortDescription: 'Agent-based SaaS connecting property owners and tenants leases, comms, and operations.',
     fullDescription:
-      'PM is built with a portfolio mindset: minimal UI, clean spacing, and readable content. The project emphasizes user experience flow, consistent components, and a modern visual rhythm so the interface feels calm and professional on every screen.',
-    imageAlt: 'PM project screenshot',
-    technologies: ['UI Structure', 'Responsive UX', 'Clean Components'],
+      'A property management SaaS built around agents who bridge owners and tenants. It supports day-to-day rental operations, clear roles for each party, and a workflow that keeps listings, tenants, and ownership aligned in one system.',
+    imageAlt: 'Property management system screenshot',
+    technologies: [...defaultStack],
   },
 ];
 
