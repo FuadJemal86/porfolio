@@ -16,6 +16,7 @@ export function Contact() {
   const emailjsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
 
   const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [sending, setSending] = useState(false);
@@ -33,10 +34,14 @@ export function Contact() {
 
   const validate = () => {
     const trimmedName = name.trim();
+    const trimmedPhone = phone.trim();
     const trimmedEmail = email.trim();
     const trimmedMessage = message.trim();
 
     if (trimmedName.length < 2) return 'Please enter your name.';
+    const phoneDigits = trimmedPhone.replace(/\D/g, '');
+    if (trimmedPhone.length < 8) return 'Please enter your phone number.';
+    if (phoneDigits.length < 8) return 'Please enter a valid phone number.';
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) return 'Please enter a valid email address.';
     if (trimmedMessage.length < 5) return 'Please enter your message (at least 5 characters).';
     return null;
@@ -68,12 +73,15 @@ export function Contact() {
       await emailjs.send(emailjsServiceId!, emailjsTemplateId!, {
         to_email: receiverEmail,
         from_name: name.trim(),
+        from_phone: phone.trim(),
+        phone: phone.trim(),
         from_email: email.trim(),
         message: message.trim(),
       });
 
       setStatus({ type: 'success', message: 'Message sent successfully!' });
       setName('');
+      setPhone('');
       setEmail('');
       setMessage('');
     } catch (err) {
@@ -166,6 +174,19 @@ export function Contact() {
                   className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#8b5cf6] outline-none transition-all shadow-inner"
                   placeholder="Your name"
                   autoComplete="name"
+                />
+              </div>
+              <div className="sm:col-span-1">
+                <label className="text-gray-400 text-xs uppercase font-semibold mb-2 sm:mb-3 block">
+                  Phone
+                </label>
+                <input
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  className="w-full min-w-0 box-border bg-[#191b1e] border-2 border-[#191b1e] rounded-lg p-3 sm:p-4 text-white text-sm sm:text-base focus:border-[#8b5cf6] outline-none transition-all shadow-inner"
+                  placeholder="+251 9…"
+                  autoComplete="tel"
                 />
               </div>
               <div className="sm:col-span-2">
