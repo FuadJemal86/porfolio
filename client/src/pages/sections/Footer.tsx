@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Facebook, Twitter, Mail, ArrowUp } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, ArrowUp } from 'lucide-react';
+import { SOCIAL } from '../../constants/social';
 
 const footerLinks: { label: string; href: string }[] = [
   { label: 'About', href: '#about' },
@@ -15,10 +16,9 @@ export function Footer() {
   };
 
   const socialLinks = [
-    { icon: <Facebook size={20} />, href: '#' },
-    { icon: <Twitter size={20} />, href: '#' },
-    { icon: <Linkedin size={20} />, href: '#' },
-    { icon: <Github size={20} />, href: '#' },
+    { icon: <Linkedin size={20} />, href: SOCIAL.linkedin, label: 'LinkedIn' },
+    { icon: <Github size={20} />, href: SOCIAL.github, label: 'GitHub' },
+    { icon: <Twitter size={20} />, href: SOCIAL.x, label: 'X' },
   ];
 
   return (
@@ -52,6 +52,9 @@ export function Footer() {
                 <a
                   key={i}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
                   className="w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-gray-400 hover:text-[#8b5cf6] hover:-translate-y-1 transition-all duration-300"
                 >
                   {social.icon}

@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Github, Linkedin, Code2, Database, Globe } from 'lucide-react';
+import { Github, Linkedin, Code2, Database, Twitter } from 'lucide-react';
 import fuadpp from '../image/fuadpp.jpg';
+import { SOCIAL } from '../../constants/social';
 
 function ProfileRing({ className = '' }: { className?: string }) {
   return (
@@ -124,14 +125,23 @@ export function Hero() {
                 Find me
               </p>
               <div className="flex gap-3 sm:gap-4">
-                {[<Github key="g" />, <Linkedin key="l" />, <Globe key="w" />].map((icon, i) => (
-                  <button
-                    key={i}
-                    type="button"
+                {(
+                  [
+                    { href: SOCIAL.github, label: 'GitHub', icon: <Github className="w-5 h-5 sm:w-6 sm:h-6" /> },
+                    { href: SOCIAL.linkedin, label: 'LinkedIn', icon: <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" /> },
+                    { href: SOCIAL.x, label: 'X', icon: <Twitter className="w-5 h-5 sm:w-6 sm:h-6" /> },
+                  ] as const
+                ).map(({ href, label, icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={label}
                     className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-white hover:text-[#8b5cf6] hover:-translate-y-1 transition-all"
                   >
                     {icon}
-                  </button>
+                  </a>
                 ))}
               </div>
             </div>

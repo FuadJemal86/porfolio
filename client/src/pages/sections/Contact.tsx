@@ -1,6 +1,7 @@
 import { type FormEvent, useEffect, useMemo, useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { Phone, Mail, MapPin, Facebook, Linkedin, Github } from 'lucide-react';
+import { Phone, Mail, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
+import { SOCIAL } from '../../constants/social';
 import { AnimatePresence, motion } from 'framer-motion';
 
 type ContactStatus =
@@ -8,12 +9,35 @@ type ContactStatus =
   | { type: 'error'; message: string }
   | null;
 
-export function Contact() {
-  const receiverEmail = 'fuad.jemal.mail@gmail.com';
+function formatEmailJsError(err: unknown): string {
+  const fallback = 'Failed to send message. Please try again in a moment.';
+  if (typeof err === 'string' && err.trim()) {
+    return err.length > 320 ? `${err.slice(0, 320)}…` : err;
+  }
+  if (err && typeof err === 'object' && 'text' in err) {
+    const raw = String((err as { text?: string }).text ?? '').trim();
+    if (!raw) return fallback;
+    try {
+      const parsed = JSON.parse(raw) as { message?: string; error?: string };
+      const detail = (parsed.message || parsed.error || raw).trim();
+      return detail.length > 320 ? `${detail.slice(0, 320)}…` : detail;
+    } catch {
+      return raw.length > 320 ? `${raw.slice(0, 320)}…` : raw;
+    }
+  }
+  if (err instanceof Error && err.message) {
+    return err.message.length > 320 ? `${err.message.slice(0, 320)}…` : err.message;
+  }
+  return fallback;
+}
 
-  const emailjsServiceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined;
-  const emailjsTemplateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined;
-  const emailjsPublicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
+export function Contact() {
+  /** Inbox for EmailJS contact form only (footer / mailto elsewhere stay fuad.jemal.mail@gmail.com). */
+  const emailjsRecipientEmail = 'fuad47722@gmail.com';
+
+  const emailjsServiceId = (import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined)?.trim();
+  const emailjsTemplateId = (import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined)?.trim();
+  const emailjsPublicKey = (import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined)?.trim();
 
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
@@ -29,7 +53,7 @@ export function Contact() {
 
   useEffect(() => {
     if (!emailjsPublicKey) return;
-    emailjs.init(emailjsPublicKey);
+    emailjs.init({ publicKey: emailjsPublicKey });
   }, [emailjsPublicKey]);
 
   const validate = () => {
@@ -70,14 +94,21 @@ export function Contact() {
     setStatus(null);
 
     try {
-      await emailjs.send(emailjsServiceId!, emailjsTemplateId!, {
-        to_email: receiverEmail,
-        from_name: name.trim(),
-        from_phone: phone.trim(),
-        phone: phone.trim(),
-        from_email: email.trim(),
-        message: message.trim(),
-      });
+      const trimmedEmail = email.trim();
+      await emailjs.send(
+        emailjsServiceId!,
+        emailjsTemplateId!,
+        {
+          to_email: emailjsRecipientEmail,
+          from_name: name.trim(),
+          from_phone: phone.trim(),
+          phone: phone.trim(),
+          from_email: trimmedEmail,
+          reply_to: trimmedEmail,
+          message: message.trim(),
+        },
+        { publicKey: emailjsPublicKey! },
+      );
 
       setStatus({ type: 'success', message: 'Message sent successfully!' });
       setName('');
@@ -85,9 +116,10 @@ export function Contact() {
       setEmail('');
       setMessage('');
     } catch (err) {
+      if (import.meta.env.DEV) console.error('EmailJS send failed:', err);
       setStatus({
         type: 'error',
-        message: 'Failed to send message. Please try again in a moment.',
+        message: formatEmailJsError(err),
       });
     } finally {
       setSending(false);
@@ -144,14 +176,23 @@ export function Contact() {
 
             <p className="text-gray-400 text-xs uppercase tracking-widest mb-3 sm:mb-4">Find me in</p>
             <div className="flex gap-3 sm:gap-4 flex-wrap">
-              {[<Facebook key="f" />, <Linkedin key="l" />, <Github key="g" />].map((icon, i) => (
-                <button
-                  key={i}
-                  type="button"
+              {(
+                [
+                  { href: SOCIAL.linkedin, label: 'LinkedIn', icon: <Linkedin className="w-5 h-5 sm:w-6 sm:h-6" /> },
+                  { href: SOCIAL.github, label: 'GitHub', icon: <Github className="w-5 h-5 sm:w-6 sm:h-6" /> },
+                  { href: SOCIAL.x, label: 'X', icon: <Twitter className="w-5 h-5 sm:w-6 sm:h-6" /> },
+                ] as const
+              ).map(({ href, label, icon }) => (
+                <a
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={label}
                   className="w-12 h-12 sm:w-14 sm:h-14 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-white hover:text-[#8b5cf6] hover:-translate-y-1 transition-all"
                 >
                   {icon}
-                </button>
+                </a>
               ))}
             </div>
           </motion.div>
