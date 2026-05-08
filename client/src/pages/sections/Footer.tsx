@@ -1,7 +1,10 @@
-import { motion } from 'framer-motion';
+import { motion, type Variants } from 'framer-motion';
 import { Github, Linkedin, Twitter, Mail, ArrowUp } from 'lucide-react';
 import { SOCIAL } from '../../constants/social';
 
+/* -----------------------------------------------------------------
+   Static data
+   ----------------------------------------------------------------- */
 const footerLinks: { label: string; href: string }[] = [
   { label: 'About', href: '#about' },
   { label: 'Portfolio', href: '#portfolio' },
@@ -10,6 +13,121 @@ const footerLinks: { label: string; href: string }[] = [
   { label: 'Contact', href: '#contact' },
 ];
 
+/* -----------------------------------------------------------------
+   Animation variants
+   ----------------------------------------------------------------- */
+const containerVariant: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariant: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring' as const,
+      stiffness: 100,
+      damping: 12,
+    },
+  },
+};
+
+const linkVariant: Variants = {
+  hidden: { opacity: 0, x: -10 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: 'spring' as const,
+      stiffness: 100,
+      damping: 12,
+    },
+  },
+};
+
+/* -----------------------------------------------------------------
+   Social link with enhanced hover
+   ----------------------------------------------------------------- */
+function SocialLink({
+  href,
+  label,
+  icon,
+  index,
+}: {
+  href: string;
+  label: string;
+  icon: React.ReactNode;
+  index: number;
+}) {
+  return (
+    <motion.a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-gray-400 overflow-hidden group"
+      initial={{ opacity: 0, scale: 0.5, y: 20 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{
+        delay: 0.3 + index * 0.1,
+        type: 'spring' as const,
+        stiffness: 200,
+      }}
+      whileHover={{ scale: 1.1, y: -5 }}
+      whileTap={{ scale: 0.95 }}
+    >
+      {/* Hover background */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-[#8b5cf6] to-[#5eb3f6]"
+        initial={{ opacity: 0 }}
+        whileHover={{ opacity: 1 }}
+        transition={{ duration: 0.3 }}
+      />
+      {/* Glow effect */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md bg-[#8b5cf6]/50" />
+      <div className="relative z-10 group-hover:text-white transition-colors duration-300">
+        {icon}
+      </div>
+    </motion.a>
+  );
+}
+
+/* -----------------------------------------------------------------
+   Footer link component
+   ----------------------------------------------------------------- */
+function FooterLink({ label, href, index }: { label: string; href: string; index: number }) {
+  return (
+    <motion.li variants={linkVariant} transition={{ delay: 0.1 + index * 0.05 }}>
+      <motion.a
+        href={href}
+        className="text-gray-400 hover:text-white transition-colors relative group inline-block"
+        whileHover={{ x: 5 }}
+        transition={{ type: 'spring', stiffness: 300 }}
+      >
+        <span className="relative z-10">{label}</span>
+        <motion.span
+          className="absolute bottom-0 left-0 h-px bg-[#8b5cf6]"
+          initial={{ width: 0 }}
+          whileHover={{ width: '100%' }}
+          transition={{ duration: 0.3 }}
+        />
+      </motion.a>
+    </motion.li>
+  );
+}
+
+/* -----------------------------------------------------------------
+   Footer component
+   ----------------------------------------------------------------- */
 export function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -23,84 +141,123 @@ export function Footer() {
 
   return (
     <footer className="bg-[#212428] pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-10 border-t border-black">
+      {/* Back to top button */}
       <motion.button
         type="button"
         aria-label="Back to top"
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
         onClick={scrollToTop}
         className="fixed bottom-6 right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#1e2024] shadow-2xl flex items-center justify-center text-[#8b5cf6] border border-gray-800 hover:border-[#8b5cf6] transition-colors"
+        initial={{ opacity: 0, scale: 0, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{
+          delay: 1,
+          type: 'spring' as const,
+          stiffness: 200,
+        }}
+        whileHover={{ scale: 1.1, y: -5 }}
+        whileTap={{ scale: 0.95 }}
       >
-        <ArrowUp size={22} className="sm:w-6 sm:h-6" />
+        <motion.div
+          animate={{ y: [0, -3, 0] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <ArrowUp size={22} className="sm:w-6 sm:h-6" />
+        </motion.div>
       </motion.button>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12 lg:gap-8 mb-12 sm:mb-16 text-left">
-          <div className="flex flex-col gap-4 sm:gap-6 items-start">
-            {/* <div className="flex items-center gap-3">
-              <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-gradient-to-tr from-[#8b5cf6] to-[#ec1c24] flex items-center justify-center text-white font-bold text-lg sm:text-xl shadow-lg shrink-0">
-                F
-              </div>
-              <span className="text-white font-bold text-xl sm:text-2xl tracking-tight">FUAD JEMAL</span>
-            </div> */}
-            <p className="text-gray-400 leading-relaxed text-sm max-w-sm">
+        <motion.div
+          variants={containerVariant}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12 lg:gap-8 mb-12 sm:mb-16 text-left"
+        >
+          {/* About Column */}
+          <motion.div variants={itemVariant} className="flex flex-col gap-4 sm:gap-6 items-start">
+            <motion.p
+              className="text-gray-400 leading-relaxed text-sm max-w-sm"
+              variants={itemVariant}
+            >
               Building scalable, secure, and modern digital experiences with Django, MERN, and a passion for clean
               architecture.
-            </p>
+            </motion.p>
             <div className="flex gap-3 sm:gap-4 justify-start">
               {socialLinks.map((social, i) => (
-                <a
-                  key={i}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-gray-400 hover:text-[#8b5cf6] hover:-translate-y-1 transition-all duration-300"
-                >
-                  {social.icon}
-                </a>
+                <SocialLink key={i} {...social} index={i} />
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          <div>
-            <h4 className="text-[#8b5cf6] text-sm uppercase tracking-[2px] font-bold mb-6 sm:mb-8">Quick Links</h4>
-            <ul className="space-y-3 sm:space-y-4">
-              {footerLinks.map(({ label, href }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    className="text-gray-400 hover:text-white transition-colors relative group inline-block"
-                  >
-                    <span className="relative z-10">{label}</span>
-                    <span className="absolute bottom-0 left-0 w-0 h-px bg-[#8b5cf6] transition-all group-hover:w-full" />
-                  </a>
-                </li>
+          {/* Quick Links Column */}
+          <motion.div variants={itemVariant}>
+            <motion.h4
+              className="text-[#8b5cf6] text-sm uppercase tracking-[2px] font-bold mb-6 sm:mb-8"
+              variants={itemVariant}
+            >
+              Quick Links
+            </motion.h4>
+            <motion.ul className="space-y-3 sm:space-y-4" variants={containerVariant}>
+              {footerLinks.map(({ label, href }, i) => (
+                <FooterLink key={label} label={label} href={href} index={i} />
               ))}
-            </ul>
-          </div>
+            </motion.ul>
+          </motion.div>
 
-          <div className="sm:col-span-2 lg:col-span-1">
-            <h4 className="text-[#8b5cf6] text-sm uppercase tracking-[2px] font-bold mb-6 sm:mb-8">Get In Touch</h4>
-            <div className="space-y-3 sm:space-y-4 text-gray-400 text-sm">
-              <p className="flex items-start justify-start gap-3 min-w-0">
+          {/* Contact Column */}
+          <motion.div variants={itemVariant} className="sm:col-span-2 lg:col-span-1">
+            <motion.h4
+              className="text-[#8b5cf6] text-sm uppercase tracking-[2px] font-bold mb-6 sm:mb-8"
+              variants={itemVariant}
+            >
+              Get In Touch
+            </motion.h4>
+            <motion.div
+              className="space-y-3 sm:space-y-4 text-gray-400 text-sm"
+              variants={itemVariant}
+            >
+              <motion.p
+                className="flex items-start justify-start gap-3 min-w-0"
+                whileHover={{ x: 5 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
                 <Mail size={16} className="text-[#8b5cf6] shrink-0 mt-0.5" />
-                <a href="mailto:fuad.jemal.mail@gmail.com" className="break-all">
+                <a href="mailto:fuad.jemal.mail@gmail.com" className="break-all hover:text-[#8b5cf6] transition-colors">
                   fuad.jemal.mail@gmail.com
                 </a>
-              </p>
+              </motion.p>
               <p className="leading-relaxed">Addis Ababa, Ethiopia</p>
-              <p className="mt-4 text-xs italic opacity-60">Available for freelance projects and technical collaborations.</p>
-            </div>
-          </div>
-        </div>
+              <motion.p
+                className="mt-4 text-xs italic opacity-60"
+                animate={{ opacity: [0.4, 0.7, 0.4] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                Available for freelance projects and technical collaborations.
+              </motion.p>
+            </motion.div>
+          </motion.div>
+        </motion.div>
 
-        <div className="pt-8 sm:pt-10 border-t border-gray-800/50 text-center px-0">
+        {/* Copyright */}
+        <motion.div
+          className="pt-8 sm:pt-10 border-t border-gray-800/50 text-center px-0"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+        >
           <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
             © {new Date().getFullYear()}. All rights reserved by{' '}
-            <span className="text-[#8b5cf6] font-semibold">Fuad Jemal</span>.
+            <motion.span
+              className="text-[#8b5cf6] font-semibold"
+              whileHover={{ scale: 1.05 }}
+              style={{ display: 'inline-block' }}
+            >
+              Fuad Jemal
+            </motion.span>
+            .
           </p>
-        </div>
+        </motion.div>
       </div>
     </footer>
   );
