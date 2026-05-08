@@ -118,7 +118,6 @@ function SkillCard({
   title,
   skills,
   color,
-  index,
 }: {
   title: string;
   skills: string[];

@@ -120,7 +120,6 @@ function ServiceCard({
   icon: Icon,
   title,
   desc,
-  index,
 }: {
   icon: React.ElementType;
   title: string;

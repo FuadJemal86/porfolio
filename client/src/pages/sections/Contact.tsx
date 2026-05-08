@@ -1,7 +1,7 @@
 import { type FormEvent, useEffect, useMemo, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import { motion, useMotionValue, useSpring, useTransform, type Variants } from 'framer-motion';
-import { Phone, Mail, MapPin, Linkedin, Github, Twitter, Send, MessageSquare, Sparkles } from 'lucide-react';
+import { Phone, Mail, MapPin, Linkedin, Github, Twitter, Send, MessageSquare } from 'lucide-react';
 import { SOCIAL } from '../../constants/social';
 import { AnimatePresence } from 'framer-motion';
 
@@ -197,7 +197,7 @@ function ContactInfoCard() {
 
           {/* Contact info */}
           <motion.div variants={containerVariant} className="space-y-3 sm:space-y-4 mb-8 sm:mb-10">
-            {contactInfo.map((item, i) => (
+            {contactInfo.map((item) => (
               <motion.div
                 key={item.label}
                 variants={itemVariant}
