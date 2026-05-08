@@ -13,6 +13,7 @@ const footerLinks: { label: string; href: string }[] = [
   { label: 'Contact', href: '#contact' },
 ];
 
+
 /* -----------------------------------------------------------------
    Animation variants
    ----------------------------------------------------------------- */
