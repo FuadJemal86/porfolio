@@ -15,6 +15,7 @@ const projectFolders = [
   'mishkat',
   'wcsh',
   'pm',
+  'apm'
 ] as const;
 
 type ProjectFolder = (typeof projectFolders)[number];
@@ -70,6 +71,12 @@ const defaultStack = [
   'UI Design',
 ] as const;
 
+const mobTech = [
+  'flutter',
+  'node.js',
+  'postgres'
+]
+
 const projects: PortfolioProject[] = [
   {
     folder: 'A_sync',
@@ -98,6 +105,14 @@ const projects: PortfolioProject[] = [
       'Aqua ERP is a comprehensive system for managing inventory, products, sales, purchases, and credit control. It supports overdue tracking, low-stock alerts, and automated notifications so operations stay visible, predictable, and under control from day to day.',
     imageAlt: 'Aqua ERP project screenshot',
     technologies: [...defaultStack],
+  },
+  {
+    folder: 'apm',
+    title: 'A.P.M (anonymous private messaging)',
+    shortDescription: 'A.P.M  an anonymous private messaging mobile app',
+    fullDescription: 'You can share your Private ID, and people can see the anonymous messages you received  without screenshots or any extra process',
+    imageAlt: 'Employee Management project screenshot',
+    technologies: [...mobTech],
   },
   {
     folder: 'EmployeeManegment',
@@ -495,9 +510,8 @@ function ProjectModal({
                         onClick={() => onImageSelect(idx)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg sm:rounded-xl overflow-hidden border-2 transition-all ${
-                          isActive ? 'border-[#8b5cf6]' : 'border-transparent hover:border-[#8b5cf6]/30'
-                        } bg-[#0f0f13]`}
+                        className={`shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg sm:rounded-xl overflow-hidden border-2 transition-all ${isActive ? 'border-[#8b5cf6]' : 'border-transparent hover:border-[#8b5cf6]/30'
+                          } bg-[#0f0f13]`}
                         aria-label={`Select image ${idx + 1}`}
                       >
                         <img src={src} alt="" className="w-full h-full object-cover" />

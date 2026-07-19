@@ -33,9 +33,10 @@ const services = [
   },
   {
     icon: ShieldCheck,
-    title: 'Security & Auth',
-    desc: 'Implementing JWT, RBAC, and secure API integration protocols.',
+    title: 'Mobile App',
+    desc: 'Developing mobile applications from concept to deployment.',
   },
+
 ];
 
 /* -----------------------------------------------------------------
