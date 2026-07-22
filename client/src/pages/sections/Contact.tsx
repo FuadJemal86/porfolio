@@ -535,7 +535,7 @@ export function Contact() {
             className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold mb-6"
           >
             <span className="text-[color:var(--ink)]">Contact </span>
-            <span className="relative inline-block px-2" style={{ color: '#0a0a0a' }}>
+            <span className="relative inline-block px-2">
               <span
                 className="absolute inset-0 -z-10 rounded-lg"
                 style={{ background: 'var(--accent)', transform: 'rotate(2deg)' }}
