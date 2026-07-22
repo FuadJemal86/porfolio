@@ -54,7 +54,7 @@ function useTypewriter(phrases: string[]) {
 
 export function Hero() {
   const phrases = useMemo(
-    () => ['Full Stack Developer', 'Software Engineer', 'ERP Builder', 'Problem Solver'],
+    () => ['Full Stack Developer', 'Mobile App Developer', 'Software Engineer', 'Problem Solver'],
     [],
   );
   const typingText = useTypewriter(phrases);
