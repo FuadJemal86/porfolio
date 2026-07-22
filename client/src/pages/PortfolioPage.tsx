@@ -8,7 +8,7 @@ import { Contact } from './sections/Contact'
 import { Footer } from './sections/Footer'
 export function PortfolioPage() {
   return (
-    <div className="min-h-screen bg-[#0f1729] text-white antialiased">
+    <div className="min-h-screen  text-white antialiased">
       <Header />
       <main>
         <Hero />

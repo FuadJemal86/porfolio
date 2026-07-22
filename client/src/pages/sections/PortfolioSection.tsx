@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion, useMotionValue, useSpring, useTransform, type Variants } from 'framer-motion';
+import { useEffect, useMemo, useState } from 'react';
+import { AnimatePresence, motion, type Variants } from 'framer-motion';
 import { FolderOpen, X, ExternalLink, Github, Layers, Sparkles, Maximize2 } from 'lucide-react';
 
 const projectFolders = [
@@ -109,8 +109,8 @@ const projects: PortfolioProject[] = [
   {
     folder: 'apm',
     title: 'A.P.M (anonymous private messaging)',
-    shortDescription: 'A.P.M  an anonymous private messaging mobile app',
-    fullDescription: 'You can share your Private ID, and people can see the anonymous messages you received  without screenshots or any extra process',
+    shortDescription: 'A.P.M  an anonymous private messaging mobile app',
+    fullDescription: 'You can share your Private ID, and people can see the anonymous messages you received  without screenshots or any extra process',
     imageAlt: 'Employee Management project screenshot',
     technologies: [...mobTech],
   },
@@ -215,8 +215,8 @@ const containerVariant: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.2,
+      staggerChildren: 0.08,
+      delayChildren: 0.15,
     },
   },
 };
@@ -235,40 +235,43 @@ const itemVariant: Variants = {
 };
 
 const cardVariant: Variants = {
-  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  hidden: { opacity: 0, y: 30, scale: 0.96 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
       type: 'spring' as const,
-      stiffness: 100,
+      stiffness: 110,
       damping: 15,
     },
   },
 };
 
+// Deterministic "weird" offsets — cycled per index so the grid never sits in a neat line
+const rotateFor = (i: number) => [-2, 3, -1, 2, -3, 1][i % 6];
+const liftFor = (i: number) => [0, 28, -10, 18, 0, 34][i % 6];
+
 /* -----------------------------------------------------------------
-   Floating particles component
+   Ambient floating particles (flat, no 3D)
    ----------------------------------------------------------------- */
 function FloatingParticles() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {Array.from({ length: 15 }, (_, i) => (
+      {Array.from({ length: 14 }, (_, i) => (
         <motion.div
           key={i}
-          className="absolute rounded-full bg-[#8b5cf6]/10"
+          className="absolute rounded-full"
           style={{
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
             width: Math.random() * 6 + 2,
             height: Math.random() * 6 + 2,
+            background: 'rgba(201,255,77,0.12)',
           }}
           animate={{
             y: [0, -70, 0],
-            x: [0, Math.random() * 30 - 15, 0],
             opacity: [0.1, 0.35, 0.1],
-            scale: [1, 1.25, 1],
           }}
           transition={{
             duration: Math.random() * 10 + 12,
@@ -283,53 +286,25 @@ function FloatingParticles() {
 }
 
 /* -----------------------------------------------------------------
-   Project card with 3D tilt effect
+   Project card — outline only, staggered + rotated, no 3D
    ----------------------------------------------------------------- */
 function ProjectCard({
   project,
   preview,
+  index,
   onClick,
 }: {
   project: PortfolioProject;
   preview: string | null;
+  index: number;
   onClick: () => void;
 }) {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  const springConfig = { damping: 20, stiffness: 150 };
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [5, -5]), springConfig);
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-5, 5]), springConfig);
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
   return (
     <motion.div
-      ref={cardRef}
       variants={cardVariant}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        perspective: 1000,
-        rotateX,
-        rotateY,
-        transformStyle: 'preserve-3d',
-      }}
-      whileHover={{ scale: 1.02, y: -8 }}
-      transition={{ type: 'spring' as const, stiffness: 300, damping: 20 }}
+      style={{ rotate: `${rotateFor(index)}deg`, marginTop: liftFor(index) }}
+      whileHover={{ rotate: 0, scale: 1.02, y: -6 }}
+      transition={{ type: 'spring' as const, stiffness: 260, damping: 20 }}
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -338,68 +313,59 @@ function ProjectCard({
       }}
       className="relative group cursor-pointer"
     >
-      {/* Glow effect */}
-      <motion.div
-        className="absolute inset-0 rounded-2xl sm:rounded-3xl blur-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"
-        style={{
-          background: 'linear-gradient(135deg, rgba(139,92,246,0.6) 0%, rgba(94,179,246,0.6) 100%)',
-        }}
-      />
-
-      {/* Card */}
-      <div className="relative rounded-2xl sm:rounded-3xl bg-[#1e2024] border border-[#8b5cf6]/10 shadow-xl overflow-hidden group-hover:border-[#8b5cf6]/30 transition-all duration-500">
+      {/* Outline-only container — no filled card background */}
+      <div
+        className="relative rounded-xl overflow-hidden transition-colors duration-300"
+        style={{ border: '2px solid var(--line)' }}
+        onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--accent)')}
+        onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--line)')}
+      >
         {/* Image */}
-        <div className="relative overflow-hidden aspect-video">
+        <div className="relative overflow-hidden aspect-video" style={{ borderBottom: '2px solid var(--line)' }}>
           {preview ? (
             <>
               <motion.img
                 src={preview}
                 alt={project.imageAlt}
-                className="w-full h-full object-cover"
-                whileHover={{ scale: 1.08 }}
+                className="w-full h-full object-cover grayscale-[0.15]"
+                whileHover={{ scale: 1.06 }}
                 transition={{ duration: 0.5 }}
               />
-              {/* Overlay on hover */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-t from-[#0f0f13]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              />
-              {/* View icon */}
-              <motion.div
-                className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              >
-                <div className="w-14 h-14 rounded-full bg-[#8b5cf6]/20 backdrop-blur-sm border border-[#8b5cf6]/30 flex items-center justify-center">
-                  <Maximize2 className="w-6 h-6 text-white" />
+              <motion.div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div
+                  className="w-12 h-12 rounded-full flex items-center justify-center"
+                  style={{ background: 'rgba(10,10,10,0.5)', border: '2px solid var(--accent)' }}
+                >
+                  <Maximize2 className="w-5 h-5" style={{ color: 'var(--accent)' }} />
                 </div>
               </motion.div>
             </>
           ) : (
-            <div className="w-full h-full flex items-center justify-center bg-[#191b1e] text-gray-500 text-sm">
-              <FolderOpen className="w-12 h-12 opacity-50" />
+            <div className="w-full h-full flex items-center justify-center text-[color:var(--muted)] text-sm">
+              <FolderOpen className="w-12 h-12 opacity-40" />
             </div>
           )}
         </div>
 
         {/* Content */}
         <div className="p-5 sm:p-6">
-          <h3 className="text-lg sm:text-xl font-bold text-gray-200 group-hover:text-[#8b5cf6] transition-colors duration-300">
+          <h3 className="font-heading text-lg sm:text-xl font-bold text-[color:var(--ink)] group-hover:text-[color:var(--accent)] transition-colors duration-300">
             {project.title}
           </h3>
-          <p className="text-gray-400 text-sm sm:text-base leading-relaxed mt-3 line-clamp-2">
+          <p className="text-[color:var(--muted)] text-sm sm:text-base leading-relaxed mt-3 line-clamp-2">
             {project.shortDescription}
           </p>
 
           {project.technologies && project.technologies.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4">
-              {project.technologies.slice(0, 4).map((t, i) => (
-                <motion.span
+              {project.technologies.slice(0, 4).map((t) => (
+                <span
                   key={t}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.05 }}
-                  className="text-[10px] sm:text-xs px-2.5 py-1 rounded-full border border-[#8b5cf6]/20 bg-[#8b5cf6]/10 text-gray-300 hover:bg-[#8b5cf6]/20 transition-colors"
+                  className="font-mono-ui text-[10px] sm:text-xs px-2.5 py-1 rounded-full text-[color:var(--muted)]"
+                  style={{ border: '1px solid var(--line)' }}
                 >
                   {t}
-                </motion.span>
+                </span>
               ))}
             </div>
           )}
@@ -431,7 +397,8 @@ function ProjectModal({
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 backdrop-blur-sm"
+      style={{ background: 'rgba(10,10,10,0.85)' }}
       role="dialog"
       aria-modal="true"
       aria-label={`Project details: ${project.title}`}
@@ -441,7 +408,8 @@ function ProjectModal({
       onClick={onClose}
     >
       <motion.div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-5xl max-h-[85vh] overflow-y-auto rounded-2xl sm:rounded-3xl bg-[#121415] border border-[#8b5cf6]/20 shadow-2xl"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-5xl max-h-[85vh] overflow-y-auto rounded-2xl"
+        style={{ background: 'var(--bg)', border: '2px solid var(--line)' }}
         initial={{ opacity: 0, y: 20, scale: 0.98 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 10, scale: 0.99 }}
@@ -449,9 +417,14 @@ function ProjectModal({
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="p-5 sm:p-6 border-b border-[#8b5cf6]/10 flex items-start justify-between gap-4 sticky top-0 bg-[#121415]/95 backdrop-blur-sm z-10">
+        <div
+          className="p-5 sm:p-6 flex items-start justify-between gap-4 sticky top-0 backdrop-blur-sm z-10"
+          style={{ borderBottom: '2px solid var(--line)', background: 'var(--bg)' }}
+        >
           <div className="min-w-0">
-            <h3 className="text-xl sm:text-2xl font-bold text-white truncate">{project.title}</h3>
+            <h3 className="font-heading text-xl sm:text-2xl font-bold text-[color:var(--ink)] truncate">
+              {project.title}
+            </h3>
           </div>
 
           <motion.button
@@ -460,7 +433,8 @@ function ProjectModal({
             onClick={onClose}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="shrink-0 w-10 h-10 rounded-full bg-[#1e2024] border border-[#8b5cf6]/20 text-gray-400 hover:text-white hover:border-[#8b5cf6] transition-colors flex items-center justify-center"
+            className="shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-[color:var(--muted)] hover:text-[color:var(--accent)] transition-colors"
+            style={{ border: '2px solid var(--line)' }}
           >
             <X className="w-5 h-5" />
           </motion.button>
@@ -469,13 +443,9 @@ function ProjectModal({
         {/* Body */}
         <div className="p-5 sm:p-6">
           <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
-            {/* Desktop left: Image */}
+            {/* Left: Image */}
             <div className="w-full lg:w-[55%]">
-              <motion.div
-                className="rounded-xl sm:rounded-2xl overflow-hidden border border-[#8b5cf6]/10 bg-[#0f0f13]"
-                whileHover={{ scale: 1.01 }}
-                transition={{ duration: 0.2 }}
-              >
+              <div className="rounded-xl overflow-hidden" style={{ border: '2px solid var(--line)' }}>
                 {mainImage ? (
                   <button
                     type="button"
@@ -486,18 +456,18 @@ function ProjectModal({
                     <img
                       src={mainImage}
                       alt={project.imageAlt}
-                      className="w-full h-auto max-h-[44vh] object-contain bg-[#0f0f13]"
+                      className="w-full h-auto max-h-[44vh] object-contain"
                     />
                     <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                      <Maximize2 className="w-8 h-8 text-white" />
+                      <Maximize2 className="w-8 h-8" style={{ color: 'var(--accent)' }} />
                     </div>
                   </button>
                 ) : (
-                  <div className="w-full aspect-video flex items-center justify-center text-gray-500 text-sm">
+                  <div className="w-full aspect-video flex items-center justify-center text-[color:var(--muted)] text-sm">
                     Image not found
                   </div>
                 )}
-              </motion.div>
+              </div>
 
               {images.length > 1 && (
                 <div className="mt-4 flex gap-3 overflow-x-auto pb-2">
@@ -510,8 +480,8 @@ function ProjectModal({
                         onClick={() => onImageSelect(idx)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg sm:rounded-xl overflow-hidden border-2 transition-all ${isActive ? 'border-[#8b5cf6]' : 'border-transparent hover:border-[#8b5cf6]/30'
-                          } bg-[#0f0f13]`}
+                        className="shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden transition-all"
+                        style={{ border: `2px solid ${isActive ? 'var(--accent)' : 'var(--line)'}` }}
                         aria-label={`Select image ${idx + 1}`}
                       >
                         <img src={src} alt="" className="w-full h-full object-cover" />
@@ -522,27 +492,30 @@ function ProjectModal({
               )}
             </div>
 
-            {/* Desktop right: Story */}
+            {/* Right: Story */}
             <div className="w-full lg:w-[45%]">
-              <p className="text-gray-400 text-sm sm:text-base leading-relaxed">{project.fullDescription}</p>
+              <p className="text-[color:var(--muted)] text-sm sm:text-base leading-relaxed">
+                {project.fullDescription}
+              </p>
 
               {project.technologies && project.technologies.length > 0 && (
                 <div className="mt-6">
-                  <p className="text-[#8b5cf6] text-xs uppercase tracking-widest mb-3 flex items-center gap-2">
+                  <p
+                    className="font-mono-ui text-xs uppercase tracking-widest mb-3 flex items-center gap-2"
+                    style={{ color: 'var(--accent)' }}
+                  >
                     <Layers className="w-4 h-4" />
                     Technologies
                   </p>
                   <div className="flex flex-wrap gap-2">
-                    {project.technologies.map((t, i) => (
-                      <motion.span
+                    {project.technologies.map((t) => (
+                      <span
                         key={t}
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: i * 0.05 }}
-                        className="text-xs px-3 py-1.5 rounded-full border border-[#8b5cf6]/20 bg-[#8b5cf6]/10 text-gray-300 hover:bg-[#8b5cf6]/20 transition-colors"
+                        className="font-mono-ui text-xs px-3 py-1.5 rounded-full text-[color:var(--muted)]"
+                        style={{ border: '1px solid var(--line)' }}
                       >
                         {t}
-                      </motion.span>
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -555,9 +528,10 @@ function ProjectModal({
                       href={project.liveUrl}
                       target="_blank"
                       rel="noreferrer"
-                      whileHover={{ scale: 1.02 }}
+                      whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.98 }}
-                      className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#8b5cf6] text-white font-semibold text-sm hover:bg-[#7c3aed] transition-colors"
+                      className="font-heading inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-semibold text-sm transition-colors"
+                      style={{ background: 'var(--accent)', color: '#0a0a0a' }}
                     >
                       <ExternalLink className="w-4 h-4" />
                       View Live Project
@@ -568,9 +542,10 @@ function ProjectModal({
                       href={project.githubUrl}
                       target="_blank"
                       rel="noreferrer"
-                      whileHover={{ scale: 1.02 }}
+                      whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.98 }}
-                      className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-[#1e2024] border border-[#8b5cf6]/20 text-gray-300 font-semibold text-sm hover:border-[#8b5cf6] hover:text-white transition-colors"
+                      className="font-heading inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full font-semibold text-sm text-[color:var(--ink)] hover:text-[color:var(--accent)] transition-colors"
+                      style={{ border: '2px solid var(--line)' }}
                     >
                       <Github className="w-4 h-4" />
                       GitHub Repo
@@ -592,7 +567,8 @@ function ProjectModal({
 function FullscreenImageModal({ src, onClose }: { src: string; onClose: () => void }) {
   return (
     <motion.div
-      className="fixed inset-0 z-60 bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+      className="fixed inset-0 z-[60] backdrop-blur-md flex items-center justify-center p-4"
+      style={{ background: 'rgba(10,10,10,0.92)' }}
       role="dialog"
       aria-modal="true"
       aria-label="Full screen project image"
@@ -615,12 +591,13 @@ function FullscreenImageModal({ src, onClose }: { src: string; onClose: () => vo
           onClick={onClose}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="absolute -top-12 right-0 w-10 h-10 rounded-full bg-[#1e2024] border border-[#8b5cf6]/20 text-gray-400 hover:text-white hover:border-[#8b5cf6] transition-colors flex items-center justify-center"
+          className="absolute -top-12 right-0 w-10 h-10 rounded-full flex items-center justify-center text-[color:var(--muted)] hover:text-[color:var(--accent)] transition-colors"
+          style={{ border: '2px solid var(--line)' }}
         >
           <X className="w-5 h-5" />
         </motion.button>
 
-        <div className="rounded-2xl sm:rounded-3xl overflow-hidden border border-[#8b5cf6]/20 bg-[#0f0f13]">
+        <div className="rounded-2xl overflow-hidden" style={{ border: '2px solid var(--line)' }}>
           <img
             src={src}
             alt="Full screen project"
@@ -682,57 +659,39 @@ export function PortfolioSection() {
   return (
     <section
       id="portfolio"
-      className="relative py-20 sm:py-24 md:py-32 bg-[#0f0f13] overflow-hidden"
+      className="relative py-20 sm:py-24 md:py-32 overflow-hidden"
+      style={{ background: 'var(--bg)' }}
       aria-labelledby="portfolio-heading"
     >
       {/* Background effects */}
       <FloatingParticles />
 
-      {/* Gradient orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          className="absolute top-1/3 -right-1/4 w-[500px] h-[500px] rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(139,92,246,0.08) 0%, transparent 70%)',
-          }}
-          animate={{
-            x: [0, -30, 0],
-            y: [0, 40, 0],
-            scale: [1, 1.1, 1],
-          }}
-          transition={{
-            duration: 18,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-1/4 -left-1/4 w-[400px] h-[400px] rounded-full"
-          style={{
-            background: 'radial-gradient(circle, rgba(94,179,246,0.06) 0%, transparent 70%)',
-          }}
-          animate={{
-            x: [0, 20, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.15, 1],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-      </div>
-
       {/* Grid pattern */}
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(rgba(139,92,246,0.3) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(139,92,246,0.3) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
+                           linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
         }}
       />
+
+      {/* Oversized watermark word */}
+      <div
+        aria-hidden
+        className="font-heading absolute select-none pointer-events-none whitespace-nowrap font-bold"
+        style={{
+          top: '4%',
+          left: '50%',
+          transform: 'translateX(-50%) rotate(2deg)',
+          fontSize: 'clamp(3.5rem, 16vw, 12rem)',
+          color: 'transparent',
+          WebkitTextStroke: '1.5px rgba(255,255,255,0.06)',
+          zIndex: 0,
+        }}
+      >
+        MADE · SHIPPED · REAL
+      </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
@@ -741,12 +700,18 @@ export function PortfolioSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-16 sm:mb-20"
         >
           {/* Badge */}
           <motion.div
             variants={itemVariant}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8b5cf6]/10 border border-[#8b5cf6]/20 text-[#8b5cf6] text-xs uppercase tracking-wider mb-6"
+            className="font-mono-ui inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs uppercase tracking-wider mb-6"
+            style={{
+              background: 'rgba(201,255,77,0.08)',
+              borderColor: 'rgba(201,255,77,0.3)',
+              color: 'var(--accent)',
+              rotate: '-2deg',
+            }}
           >
             <Sparkles className="w-4 h-4" />
             Features
@@ -755,7 +720,8 @@ export function PortfolioSection() {
           {/* Subtitle */}
           <motion.p
             variants={itemVariant}
-            className="text-[#8b5cf6] text-xs sm:text-sm uppercase tracking-widest mb-4"
+            className="font-mono-ui text-xs sm:text-sm uppercase tracking-widest mb-4"
+            style={{ color: 'var(--accent)' }}
           >
             Visit my portfolio and keep your feedback
           </motion.p>
@@ -764,49 +730,43 @@ export function PortfolioSection() {
           <motion.h2
             id="portfolio-heading"
             variants={itemVariant}
-            className="text-4xl sm:text-5xl md:text-6xl font-bold mb-6"
+            className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold mb-6"
           >
-            <span className="text-white">My </span>
-            <motion.span
-              className="bg-gradient-to-r from-[#8b5cf6] via-[#a78bfa] to-[#5eb3f6] bg-clip-text text-transparent"
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: 'linear',
-              }}
-              style={{ backgroundSize: '200% 200%' }}
-            >
+            <span className="text-[color:var(--ink)]">My </span>
+            <span className="relative inline-block px-2">
+              <span
+                className="absolute inset-0 -z-10 rounded-lg"
+                style={{ background: 'var(--accent)', transform: 'rotate(-2deg)' }}
+              />
               Portfolio
-            </motion.span>
+            </span>
           </motion.h2>
 
           {/* Description */}
           <motion.p
             variants={itemVariant}
-            className="text-gray-400 text-lg max-w-2xl mx-auto"
+            className="text-[color:var(--muted)] text-lg max-w-2xl mx-auto"
           >
             Showcasing a diverse range of projects built with modern technologies and best practices
           </motion.p>
         </motion.div>
 
-        {/* Projects Grid */}
+        {/* Projects Grid — deliberately staggered, not a neat aligned grid */}
         <motion.div
           variants={containerVariant}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+          viewport={{ once: true, amount: 0.05 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 sm:gap-x-8 gap-y-10 sm:gap-y-14"
         >
-          {projects.map((proj) => {
+          {projects.map((proj, i) => {
             const preview = imagesByFolder[proj.folder]?.[0] ?? null;
             return (
               <ProjectCard
                 key={proj.folder}
                 project={proj}
                 preview={preview}
+                index={i}
                 onClick={() => setActiveFolder(proj.folder)}
               />
             );

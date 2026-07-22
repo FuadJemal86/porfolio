@@ -1,5 +1,5 @@
 import { motion, type Variants } from 'framer-motion';
-import { Github, Linkedin, Twitter, Mail, ArrowUp } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, MapPin, ArrowUp } from 'lucide-react';
 import { SOCIAL } from '../../constants/social';
 
 /* -----------------------------------------------------------------
@@ -12,7 +12,6 @@ const footerLinks: { label: string; href: string }[] = [
   { label: 'Resume', href: '#resume' },
   { label: 'Contact', href: '#contact' },
 ];
-
 
 /* -----------------------------------------------------------------
    Animation variants
@@ -41,6 +40,20 @@ const itemVariant: Variants = {
   },
 };
 
+const cardVariant: Variants = {
+  hidden: { opacity: 0, y: 30, scale: 0.97 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: 'spring' as const,
+      stiffness: 110,
+      damping: 15,
+    },
+  },
+};
+
 const linkVariant: Variants = {
   hidden: { opacity: 0, x: -10 },
   visible: {
@@ -55,13 +68,12 @@ const linkVariant: Variants = {
 };
 
 /* -----------------------------------------------------------------
-   Social link with enhanced hover
+   Social link — outline style, flat (matches ContactInfoCard icons)
    ----------------------------------------------------------------- */
 function SocialLink({
   href,
   label,
   icon,
-  index,
 }: {
   href: string;
   label: string;
@@ -74,30 +86,12 @@ function SocialLink({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-[#1e2024] shadow-xl flex items-center justify-center text-gray-400 overflow-hidden group"
-      initial={{ opacity: 0, scale: 0.5, y: 20 }}
-      whileInView={{ opacity: 1, scale: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{
-        delay: 0.3 + index * 0.1,
-        type: 'spring' as const,
-        stiffness: 200,
-      }}
-      whileHover={{ scale: 1.1, y: -5 }}
+      className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center text-[color:var(--muted)] hover:text-[color:var(--accent)] transition-all"
+      style={{ border: '2px solid var(--line)' }}
+      whileHover={{ scale: 1.1, y: -3 }}
       whileTap={{ scale: 0.95 }}
     >
-      {/* Hover background */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-br from-[#8b5cf6] to-[#5eb3f6]"
-        initial={{ opacity: 0 }}
-        whileHover={{ opacity: 1 }}
-        transition={{ duration: 0.3 }}
-      />
-      {/* Glow effect */}
-      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md bg-[#8b5cf6]/50" />
-      <div className="relative z-10 group-hover:text-white transition-colors duration-300">
-        {icon}
-      </div>
+      {icon}
     </motion.a>
   );
 }
@@ -110,13 +104,14 @@ function FooterLink({ label, href, index }: { label: string; href: string; index
     <motion.li variants={linkVariant} transition={{ delay: 0.1 + index * 0.05 }}>
       <motion.a
         href={href}
-        className="text-gray-400 hover:text-white transition-colors relative group inline-block"
+        className="text-[color:var(--muted)] hover:text-[color:var(--ink)] transition-colors relative group inline-block text-sm sm:text-base"
         whileHover={{ x: 5 }}
         transition={{ type: 'spring', stiffness: 300 }}
       >
         <span className="relative z-10">{label}</span>
         <motion.span
-          className="absolute bottom-0 left-0 h-px bg-[#8b5cf6]"
+          className="absolute bottom-0 left-0 h-px"
+          style={{ background: 'var(--accent)' }}
           initial={{ width: 0 }}
           whileHover={{ width: '100%' }}
           transition={{ duration: 0.3 }}
@@ -135,19 +130,23 @@ export function Footer() {
   };
 
   const socialLinks = [
-    { icon: <Linkedin size={20} />, href: SOCIAL.linkedin, label: 'LinkedIn' },
-    { icon: <Github size={20} />, href: SOCIAL.github, label: 'GitHub' },
-    { icon: <Twitter size={20} />, href: SOCIAL.x, label: 'X' },
+    { icon: <Linkedin size={18} className="sm:w-5 sm:h-5" />, href: SOCIAL.linkedin, label: 'LinkedIn' },
+    { icon: <Github size={18} className="sm:w-5 sm:h-5" />, href: SOCIAL.github, label: 'GitHub' },
+    { icon: <Twitter size={18} className="sm:w-5 sm:h-5" />, href: SOCIAL.x, label: 'X' },
   ];
 
   return (
-    <footer className="bg-[#212428] pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-10 border-t border-black">
-      {/* Back to top button */}
+    <footer
+      className="relative pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-10"
+      style={{ background: 'var(--bg)', borderTop: '2px solid var(--line)' }}
+    >
+      {/* Back to top button — outline style, matches contact icons */}
       <motion.button
         type="button"
         aria-label="Back to top"
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#1e2024] shadow-2xl flex items-center justify-center text-[#8b5cf6] border border-gray-800 hover:border-[#8b5cf6] transition-colors"
+        className="fixed bottom-6 right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-[color:var(--accent)] transition-colors"
+        style={{ background: 'var(--bg)', border: '2px solid var(--line)' }}
         initial={{ opacity: 0, scale: 0, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{
@@ -155,7 +154,7 @@ export function Footer() {
           type: 'spring' as const,
           stiffness: 200,
         }}
-        whileHover={{ scale: 1.1, y: -5 }}
+        whileHover={{ scale: 1.1, y: -5, borderColor: 'var(--accent)' }}
         whileTap={{ scale: 0.95 }}
       >
         <motion.div
@@ -175,9 +174,15 @@ export function Footer() {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 sm:gap-12 lg:gap-8 mb-12 sm:mb-16 text-left"
         >
           {/* About Column */}
-          <motion.div variants={itemVariant} className="flex flex-col gap-4 sm:gap-6 items-start">
+          <motion.div variants={cardVariant} className="flex flex-col gap-4 sm:gap-6 items-start">
+            <motion.h4
+              variants={itemVariant}
+              className="font-heading text-xl sm:text-2xl font-bold text-[color:var(--ink)]"
+            >
+              Fuad Jemal
+            </motion.h4>
             <motion.p
-              className="text-gray-400 leading-relaxed text-sm max-w-sm"
+              className="font-mono-ui text-[color:var(--muted)] leading-relaxed text-sm max-w-sm"
               variants={itemVariant}
             >
               Building scalable, secure, and modern digital experiences with Django, MERN, and a passion for clean
@@ -193,7 +198,7 @@ export function Footer() {
           {/* Quick Links Column */}
           <motion.div variants={itemVariant}>
             <motion.h4
-              className="text-[#8b5cf6] text-sm uppercase tracking-[2px] font-bold mb-6 sm:mb-8"
+              className="font-mono-ui text-[color:var(--accent)] text-xs sm:text-sm uppercase tracking-widest font-semibold mb-6 sm:mb-8"
               variants={itemVariant}
             >
               Quick Links
@@ -208,13 +213,13 @@ export function Footer() {
           {/* Contact Column */}
           <motion.div variants={itemVariant} className="sm:col-span-2 lg:col-span-1">
             <motion.h4
-              className="text-[#8b5cf6] text-sm uppercase tracking-[2px] font-bold mb-6 sm:mb-8"
+              className="font-mono-ui text-[color:var(--accent)] text-xs sm:text-sm uppercase tracking-widest font-semibold mb-6 sm:mb-8"
               variants={itemVariant}
             >
               Get In Touch
             </motion.h4>
             <motion.div
-              className="space-y-3 sm:space-y-4 text-gray-400 text-sm"
+              className="space-y-3 sm:space-y-4 text-[color:var(--muted)] text-sm"
               variants={itemVariant}
             >
               <motion.p
@@ -222,14 +227,24 @@ export function Footer() {
                 whileHover={{ x: 5 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
-                <Mail size={16} className="text-[#8b5cf6] shrink-0 mt-0.5" />
-                <a href="mailto:fuad.jemal.mail@gmail.com" className="break-all hover:text-[#8b5cf6] transition-colors">
+                <Mail size={16} className="text-[color:var(--accent)] shrink-0 mt-0.5" />
+                <a
+                  href="mailto:fuad.jemal.mail@gmail.com"
+                  className="break-all hover:text-[color:var(--accent)] transition-colors"
+                >
                   fuad.jemal.mail@gmail.com
                 </a>
               </motion.p>
-              <p className="leading-relaxed">Addis Ababa, Ethiopia</p>
               <motion.p
-                className="mt-4 text-xs italic opacity-60"
+                className="flex items-start justify-start gap-3 min-w-0"
+                whileHover={{ x: 5 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <MapPin size={16} className="text-[color:var(--accent)] shrink-0 mt-0.5" />
+                <span className="leading-relaxed">Addis Ababa, Ethiopia</span>
+              </motion.p>
+              <motion.p
+                className="mt-4 text-xs italic opacity-60 font-mono-ui"
                 animate={{ opacity: [0.4, 0.7, 0.4] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               >
@@ -241,16 +256,17 @@ export function Footer() {
 
         {/* Copyright */}
         <motion.div
-          className="pt-8 sm:pt-10 border-t border-gray-800/50 text-center px-0"
+          className="pt-8 sm:pt-10 text-center px-0"
+          style={{ borderTop: '2px solid var(--line)' }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.5 }}
         >
-          <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">
+          <p className="font-mono-ui text-[color:var(--muted)] text-xs sm:text-sm leading-relaxed">
             © {new Date().getFullYear()}. All rights reserved by{' '}
             <motion.span
-              className="text-[#8b5cf6] font-semibold"
+              className="text-[color:var(--accent)] font-semibold"
               whileHover={{ scale: 1.05 }}
               style={{ display: 'inline-block' }}
             >

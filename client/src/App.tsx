@@ -1,3 +1,4 @@
+import './index.css'
 import { PortfolioPage } from './pages/PortfolioPage'
 
 function App() {
