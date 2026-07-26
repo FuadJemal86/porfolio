@@ -7,6 +7,14 @@ import {
   Sparkles,
   Database,
   Zap,
+  GraduationCap,
+  BookOpen,
+  Briefcase,
+  Building2,
+  Stethoscope,
+  MapPin,
+  Users,
+  Quote,
 } from 'lucide-react';
 
 /* -----------------------------------------------------------------
@@ -55,6 +63,83 @@ const stickers = [
   { value: '15+', label: 'Projects', rotate: -6 },
   { value: '3+', label: 'Years', rotate: 4 },
   { value: '100%', label: 'Client happy', rotate: -3 },
+];
+
+const education = [
+  {
+    school: 'Jimma University',
+    degree: 'BSc in Information Science',
+    period: '2026',
+    text: "Four years of formal grounding in how information actually moves — databases, systems analysis, and software design — that turned what I'd already been building on my own into something I could reason about properly.",
+    icon: <GraduationCap className="w-5 h-5" />,
+    rotate: -2,
+  },
+  {
+    school: 'ALX Africa',
+    degree: 'Software Engineering — Django Specialization',
+    period: '2025',
+    text: "A hands-on, project-first program that pushed me to ship real backend systems in Django under real deadlines. This is where I stopped just knowing Python and started building with it.",
+    icon: <BookOpen className="w-5 h-5" />,
+    rotate: 2,
+  },
+];
+
+const workHistory = [
+  {
+    company: 'Sheira Community',
+    location: 'Remote',
+    role: 'Mentor',
+    period: '2025 — 2026',
+    text: "Mentored aspiring developers coming up through the Sheira community, walking them through real code, real bugs, and the habits that actually matter — the same way people once did for me. Teaching it turned out to sharpen my own fundamentals just as much.",
+    icon: <Users className="w-5 h-5" />,
+    rotate: -2,
+  },
+  {
+    company: 'Usifay AI',
+    location: 'Australia (Remote)',
+    role: 'Full Stack Developer',
+    period: '2025',
+    text: "Built and maintained full stack features for an Australian AI company, working across the frontend and backend to ship product for a client thousands of miles away — a crash course in async collaboration and writing code that has to just work, no matter the time zone.",
+    icon: <Sparkles className="w-5 h-5" />,
+    rotate: -3,
+  },
+  {
+    company: 'Async Technology',
+    location: 'Remote',
+    role: 'Full Stack Developer',
+    period: '2025',
+    text: "Worked on end-to-end product features, from API design to the interfaces people actually clicked on. This is where shipping fast without breaking things became less of a goal and more of a habit.",
+    icon: <Building2 className="w-5 h-5" />,
+    rotate: 2,
+  },
+  {
+    company: 'Werabe Comprehensive Specialized Hospital',
+    location: 'Werabe, Ethiopia',
+    role: 'Full Stack Developer',
+    period: '2024',
+    text: "Built internal software for a real hospital handling real patients — where a bug isn't just an inconvenience, it's someone's care getting delayed. That weight is what taught me to test twice and ship once.",
+    icon: <Stethoscope className="w-5 h-5" />,
+    rotate: -1,
+  },
+];
+
+const testimonials = [
+  {
+    quote:
+      "Fuad contributed to developing and improving our company website, demonstrating strong technical skills, creativity, and attention to detail. He consistently met deadlines, communicated effectively, and showed initiative in solving problems — quickly understanding project requirements and delivering responsive, well-structured web solutions that added real value to our team.",
+    author: 'Kahlid',
+    role: 'Software Developer, Async',
+    period: 'Jan — Mar 2025 · Website Development Internship',
+    rotate: -1,
+  },
+  {
+    quote:
+      "Fuad was dedicated to his work at Werabe Comprehensive Specialized Hospital, consistently showing up with focus and reliability. He communicated clearly with the team, made sure requirements were understood before writing a line of code, and delivered software our staff could actually depend on.",
+    author: 'WCSH',
+    role: 'Werabe Comprehensive Specialized Hospital',
+    period: '2024 · Full Stack Developer',
+    rotate: 1,
+  },
 ];
 
 /* -----------------------------------------------------------------
@@ -139,7 +224,7 @@ function CapabilityCard({
     >
       <div
         className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
-        style={{ background: 'rgba(201,255,77,0.12)', color: 'var(--accent)' }}
+        style={{ border: '1px solid var(--line)', color: 'var(--accent)' }}
       >
         {icon}
       </div>
@@ -147,6 +232,186 @@ function CapabilityCard({
         {title}
       </h3>
       <p className="text-[color:var(--muted)] text-sm leading-relaxed">{text}</p>
+    </motion.div>
+  );
+}
+
+/* -----------------------------------------------------------------
+   Section label — small eyebrow used above Education / Work History
+   ----------------------------------------------------------------- */
+function SectionEyebrow({
+  icon,
+  label,
+  rotate = -2,
+}: {
+  icon: React.ReactNode;
+  label: string;
+  rotate?: number;
+}) {
+  return (
+    <div
+      className="font-mono-ui inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs uppercase tracking-wider mb-6"
+      style={{
+        background: 'rgba(201,255,77,0.08)',
+        borderColor: 'rgba(201,255,77,0.3)',
+        color: 'var(--accent)',
+        rotate: `${rotate}deg`,
+      }}
+    >
+      {icon}
+      {label}
+    </div>
+  );
+}
+
+/* -----------------------------------------------------------------
+   Education card — scrapbook sticker style, matches CapabilityCard
+   ----------------------------------------------------------------- */
+function EducationCard({
+  school,
+  degree,
+  period,
+  text,
+  icon,
+  rotate,
+}: (typeof education)[number]) {
+  return (
+    <motion.div
+      variants={itemVariant}
+      whileHover={{ rotate: 0, scale: 1.02, y: -4 }}
+      transition={{ type: 'spring' as const, stiffness: 260, damping: 18 }}
+      style={{
+        rotate: `${rotate}deg`,
+        background: 'var(--bg)',
+        border: '2px solid var(--line)',
+        boxShadow: '6px 6px 0 rgba(201,255,77,0.9)',
+      }}
+      className="rounded-2xl p-6 relative"
+    >
+      <div className="flex items-start justify-between gap-3 mb-4">
+        <div
+          className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
+          style={{ border: '1px solid var(--line)', color: 'var(--accent)' }}
+        >
+          {icon}
+        </div>
+        <span
+          className="font-mono-ui text-[11px] uppercase tracking-wider px-3 py-1 rounded-full flex-shrink-0"
+          style={{ border: '1px dashed var(--line)', color: 'var(--muted)' }}
+        >
+          {period}
+        </span>
+      </div>
+      <h3 className="font-heading text-lg font-bold text-[color:var(--ink)] mb-1">
+        {school}
+      </h3>
+      <p
+        className="font-mono-ui text-xs uppercase tracking-wide mb-3"
+        style={{ color: 'var(--accent)' }}
+      >
+        {degree}
+      </p>
+      <p className="text-[color:var(--muted)] text-sm leading-relaxed">{text}</p>
+    </motion.div>
+  );
+}
+
+/* -----------------------------------------------------------------
+   Work history item — vertical timeline (order carries real meaning here)
+   ----------------------------------------------------------------- */
+function WorkItem({
+  company,
+  location,
+  role,
+  period,
+  text,
+  icon,
+  isLast,
+}: (typeof workHistory)[number] & { isLast: boolean }) {
+  return (
+    <motion.div variants={itemVariant} className="relative pl-14 pb-10">
+      {!isLast && (
+        <span
+          className="absolute left-[19px] top-11 bottom-0 w-px"
+          style={{ background: 'var(--line)', opacity: 0.5 }}
+          aria-hidden
+        />
+      )}
+      <div
+        className="absolute left-0 top-0 w-10 h-10 rounded-xl flex items-center justify-center"
+        style={{
+          background: 'var(--bg)',
+          border: '2px solid var(--line)',
+          color: 'var(--accent)',
+          boxShadow: '3px 3px 0 rgba(201,255,77,0.9)',
+        }}
+      >
+        {icon}
+      </div>
+
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 mb-1">
+        <h3 className="font-heading text-lg font-bold text-[color:var(--ink)]">
+          {role}
+        </h3>
+        <span className="font-mono-ui text-xs uppercase tracking-wider" style={{ color: 'var(--accent)' }}>
+          {period}
+        </span>
+      </div>
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-2.5">
+        <span className="text-[color:var(--ink)] font-semibold text-sm">{company}</span>
+        <span className="text-[color:var(--muted)] text-sm inline-flex items-center gap-1">
+          <MapPin className="w-3 h-3" />
+          {location}
+        </span>
+      </div>
+      <p className="text-[color:var(--muted)] text-sm leading-relaxed max-w-2xl">
+        {text}
+      </p>
+    </motion.div>
+  );
+}
+
+/* -----------------------------------------------------------------
+   Testimonial card — recommendation letter, scrapbook sticky-note style
+   ----------------------------------------------------------------- */
+function TestimonialCard({
+  quote,
+  author,
+  role,
+  period,
+  rotate,
+}: (typeof testimonials)[number]) {
+  return (
+    <motion.div
+      variants={itemVariant}
+      style={{
+        rotate: `${rotate}deg`,
+        background: 'var(--bg)',
+        border: '2px solid var(--line)',
+        boxShadow: '6px 6px 0 rgba(201,255,77,0.9)',
+      }}
+      className="rounded-2xl p-7 sm:p-8 relative flex-1 min-w-0 sm:max-w-md"
+    >
+      <Quote
+        className="w-8 h-8 mb-4"
+        style={{ color: 'var(--accent)' }}
+        strokeWidth={1.5}
+      />
+      <p className="text-[color:var(--ink)] text-base sm:text-lg leading-relaxed mb-6">
+        &ldquo;{quote}&rdquo;
+      </p>
+      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span className="font-heading font-bold text-[color:var(--ink)] text-sm">
+          {author}
+        </span>
+        <span className="text-[color:var(--muted)] text-sm">{role}</span>
+      </div>
+      <span
+        className="font-mono-ui text-[11px] uppercase tracking-wider inline-block mt-2 px-3 py-1 rounded-full"
+        style={{ border: '1px dashed var(--line)', color: 'var(--muted)' }}
+      >
+        {period}
+      </span>
     </motion.div>
   );
 }
@@ -268,7 +533,7 @@ export function About() {
           {/* Stat stickers */}
           <motion.div
             variants={itemVariant}
-            className="flex flex-wrap items-center gap-5 mb-12"
+            className="flex flex-wrap items-center gap-5 mb-20"
           >
             {stickers.map((s) => (
               <div
@@ -290,8 +555,69 @@ export function About() {
             ))}
           </motion.div>
 
-          {/* CTA */}
+          {/* ---------------------------------------------------------- */}
+          {/* Education                                                   */}
+          {/* ---------------------------------------------------------- */}
           <motion.div variants={itemVariant}>
+            <SectionEyebrow icon={<GraduationCap className="w-4 h-4" />} label="Education" rotate={-2} />
+          </motion.div>
+
+          <motion.h3
+            variants={itemVariant}
+            className="font-heading text-2xl sm:text-3xl font-bold text-[color:var(--ink)] mb-8 max-w-2xl"
+          >
+            Where the fundamentals came from.
+          </motion.h3>
+
+          <motion.div
+            variants={containerVariant}
+            className="grid sm:grid-cols-2 gap-8 mb-20"
+          >
+            {education.map((ed) => (
+              <EducationCard key={ed.school} {...ed} />
+            ))}
+          </motion.div>
+
+          {/* ---------------------------------------------------------- */}
+          {/* Work History                                               */}
+          {/* ---------------------------------------------------------- */}
+          <motion.div variants={itemVariant}>
+            <SectionEyebrow icon={<Briefcase className="w-4 h-4" />} label="Work History" rotate={2} />
+          </motion.div>
+
+          <motion.h3
+            variants={itemVariant}
+            className="font-heading text-2xl sm:text-3xl font-bold text-[color:var(--ink)] mb-10 max-w-2xl"
+          >
+            Where the fundamentals got tested.
+          </motion.h3>
+
+          <motion.div variants={containerVariant} className="mb-16 max-w-3xl">
+            {workHistory.map((job, i) => (
+              <WorkItem key={job.company} {...job} isLast={i === workHistory.length - 1} />
+            ))}
+          </motion.div>
+
+          {/* Recommendation letters */}
+          <motion.div variants={containerVariant} className="mb-14 flex flex-col sm:flex-row gap-8 items-start">
+            {testimonials.map((t) => (
+              <TestimonialCard key={t.author} {...t} />
+            ))}
+          </motion.div>
+
+          {/* CTA */}
+          <motion.div
+            variants={itemVariant}
+            style={{
+              rotate: '-1deg',
+              background: 'var(--bg)',
+              // border: '2px solid var(--line)',
+              // boxShadow: '6px 6px 0 rgba(201,255,77,0.9)',
+            }}
+            className="rounded-2xl p-7 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
+          >
+
+
             <motion.a
               href="#contact"
               className="font-heading inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm relative overflow-hidden group"
