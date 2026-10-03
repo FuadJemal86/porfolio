@@ -126,6 +126,11 @@ function FooterLink({ label, href, index }: { label: string; href: string; index
    ----------------------------------------------------------------- */
 export function Footer() {
   const scrollToTop = () => {
+    const pane = document.getElementById('portfolio-scroll');
+    if (pane && window.matchMedia('(min-width: 1024px)').matches) {
+      pane.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -138,15 +143,15 @@ export function Footer() {
   return (
     <footer
       className="relative pt-12 sm:pt-16 md:pt-20 pb-8 sm:pb-10"
-      style={{ background: 'var(--bg)', borderTop: '2px solid var(--line)' }}
+      style={{ background: 'var(--section-bg)', borderTop: '1px solid var(--border-color)' }}
     >
       {/* Back to top button — outline style, matches contact icons */}
       <motion.button
         type="button"
         aria-label="Back to top"
         onClick={scrollToTop}
-        className="fixed bottom-6 right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-full flex items-center justify-center text-[color:var(--accent)] transition-colors"
-        style={{ background: 'var(--bg)', border: '2px solid var(--line)' }}
+        className="fixed bottom-6 right-6 z-40 w-12 h-12 sm:w-14 sm:h-14 rounded-md flex items-center justify-center text-[color:var(--button-bg)] transition-colors"
+        style={{ background: 'var(--section-bg)', border: '1px solid var(--border-color)' }}
         initial={{ opacity: 0, scale: 0, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{

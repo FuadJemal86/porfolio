@@ -99,7 +99,7 @@ function FloatingParticles() {
             top: `${Math.random() * 100}%`,
             width: Math.random() * 6 + 2,
             height: Math.random() * 6 + 2,
-            background: 'rgba(201,255,77,0.12)',
+            background: 'var(--accent-soft)',
           }}
           animate={{
             y: [0, -60, 0],
@@ -145,15 +145,15 @@ function ServiceCard({
       <div
         className="relative p-6 sm:p-8 rounded-2xl sm:rounded-3xl overflow-hidden"
         style={{
-          background: 'var(--bg)',
+          background: 'var(--body-bg)',
           border: '2px solid var(--line)',
-          boxShadow: '6px 6px 0 rgba(201,255,77,0.9)',
+          boxShadow: '6px 6px 0 var(--accent-shadow)',
         }}
       >
         {/* Icon */}
         <motion.div
           className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-xl sm:rounded-2xl flex items-center justify-center mb-5 sm:mb-6 transition-colors duration-300"
-          style={{ background: 'rgba(201,255,77,0.12)' }}
+          style={{ background: 'var(--accent-soft)' }}
           whileHover={{
             scale: 1.1,
             rotate: [0, -5, 5, 0],
@@ -195,7 +195,7 @@ export function WhatIDo() {
     <section
       id="services"
       className="relative py-20 sm:py-24 md:py-32 overflow-hidden"
-      style={{ background: 'var(--bg)' }}
+      style={{ background: 'var(--section-bg)' }}
       aria-labelledby="services-heading"
     >
       {/* Background effects */}
@@ -205,8 +205,8 @@ export function WhatIDo() {
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(var(--grid-line) 1px, transparent 1px),
+                           linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
         }}
       />
@@ -221,7 +221,7 @@ export function WhatIDo() {
           transform: 'translateX(-50%) rotate(3deg)',
           fontSize: 'clamp(3.5rem, 16vw, 12rem)',
           color: 'transparent',
-          WebkitTextStroke: '1.5px rgba(255,255,255,0.06)',
+          WebkitTextStroke: '1.5px var(--watermark-stroke)',
           zIndex: 0,
         }}
       >
@@ -242,8 +242,8 @@ export function WhatIDo() {
             variants={itemVariant}
             className="font-mono-ui inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs uppercase tracking-wider mb-6"
             style={{
-              background: 'rgba(201,255,77,0.08)',
-              borderColor: 'rgba(201,255,77,0.3)',
+              background: 'var(--accent-soft)',
+              borderColor: 'var(--accent-ring)',
               color: 'var(--accent)',
               rotate: '-2deg',
             }}
@@ -259,7 +259,7 @@ export function WhatIDo() {
             className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold mb-6"
           >
             <span className="text-[color:var(--ink)]">What I </span>
-            <span className="relative inline-block px-2">
+            <span className="relative inline-block px-2 text-[color:var(--button-fg)]">
               <span
                 className="absolute inset-0 -z-10 rounded-lg"
                 style={{ background: 'var(--accent)', transform: 'rotate(2deg)' }}

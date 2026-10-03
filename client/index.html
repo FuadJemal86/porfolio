@@ -9,6 +9,22 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fuad Jemal</title>
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('portfolio-theme');
+        var theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : window.matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark';
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
 </head>
 
 <body>

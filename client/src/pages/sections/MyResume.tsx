@@ -79,7 +79,7 @@ function FloatingParticles() {
             top: `${Math.random() * 100}%`,
             width: Math.random() * 6 + 2,
             height: Math.random() * 6 + 2,
-            background: 'rgba(201,255,77,0.12)',
+            background: 'var(--accent-soft)',
           }}
           animate={{
             y: [0, -50, 0],
@@ -108,7 +108,7 @@ function SkillTag({ skill, style, rotate }: { skill: string; style: 'filled' | '
       <motion.span
         variants={tagVariant}
         whileHover={{ scale: 1.12, rotate: 0 }}
-        style={{ rotate: `${rotate}deg`, background: 'var(--accent)', color: '#0a0a0a' }}
+        style={{ rotate: `${rotate}deg`, background: 'var(--accent)', color: 'var(--button-fg)' }}
         className={`${base} rounded-full font-semibold`}
       >
         {skill}
@@ -224,7 +224,7 @@ function ResumeButton() {
       variants={itemVariant}
       whileHover={{ scale: 1.04, rotate: 0 }}
       whileTap={{ scale: 0.97 }}
-      style={{ background: 'var(--accent)', color: '#0a0a0a', rotate: '-1deg' }}
+      style={{ background: 'var(--accent)', color: 'var(--button-fg)', rotate: '-1deg' }}
       className="font-heading inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm relative overflow-hidden group"
     >
       <motion.div
@@ -254,7 +254,7 @@ export function MyResume() {
     <section
       id="resume"
       className="relative py-20 sm:py-24 md:py-32 overflow-hidden"
-      style={{ background: 'var(--bg)' }}
+      style={{ background: 'var(--section-bg)' }}
       aria-labelledby="resume-heading"
     >
       {/* Background effects */}
@@ -264,8 +264,8 @@ export function MyResume() {
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(var(--grid-line) 1px, transparent 1px),
+                           linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
         }}
       />
@@ -280,7 +280,7 @@ export function MyResume() {
           transform: 'translateX(-50%) rotate(-3deg)',
           fontSize: 'clamp(3.5rem, 16vw, 12rem)',
           color: 'transparent',
-          WebkitTextStroke: '1.5px rgba(255,255,255,0.06)',
+          WebkitTextStroke: '1.5px var(--watermark-stroke)',
           zIndex: 0,
         }}
       >
@@ -301,8 +301,8 @@ export function MyResume() {
             variants={itemVariant}
             className="font-mono-ui inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs uppercase tracking-wider mb-6"
             style={{
-              background: 'rgba(201,255,77,0.08)',
-              borderColor: 'rgba(201,255,77,0.3)',
+              background: 'var(--accent-soft)',
+              borderColor: 'var(--accent-ring)',
               color: 'var(--accent)',
               rotate: '2deg',
             }}
@@ -318,7 +318,7 @@ export function MyResume() {
             className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold mb-6"
           >
             <span className="text-[color:var(--ink)]">My </span>
-            <span className="relative inline-block px-2">
+            <span className="relative inline-block px-2 text-[color:var(--button-fg)]">
               <span
                 className="absolute inset-0 -z-10 rounded-lg"
                 style={{ background: 'var(--accent)', transform: 'rotate(-2deg)' }}

@@ -177,7 +177,7 @@ function FloatingParticles() {
             top: `${Math.random() * 100}%`,
             width: Math.random() * 5 + 2,
             height: Math.random() * 5 + 2,
-            background: 'rgba(201,255,77,0.15)',
+            background: 'var(--accent-soft)',
           }}
           animate={{
             y: [0, -60, 0],
@@ -216,9 +216,9 @@ function CapabilityCard({
       transition={{ type: 'spring' as const, stiffness: 260, damping: 18 }}
       style={{
         rotate: `${rotate}deg`,
-        background: 'var(--bg)',
+        background: 'var(--body-bg)',
         border: '2px solid var(--line)',
-        boxShadow: '6px 6px 0 rgba(201,255,77,0.9)',
+        boxShadow: '6px 6px 0 var(--accent-shadow)',
       }}
       className="rounded-2xl p-5 relative"
     >
@@ -252,8 +252,8 @@ function SectionEyebrow({
     <div
       className="font-mono-ui inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs uppercase tracking-wider mb-6"
       style={{
-        background: 'rgba(201,255,77,0.08)',
-        borderColor: 'rgba(201,255,77,0.3)',
+        background: 'var(--accent-soft)',
+        borderColor: 'var(--accent-ring)',
         color: 'var(--accent)',
         rotate: `${rotate}deg`,
       }}
@@ -282,9 +282,9 @@ function EducationCard({
       transition={{ type: 'spring' as const, stiffness: 260, damping: 18 }}
       style={{
         rotate: `${rotate}deg`,
-        background: 'var(--bg)',
+        background: 'var(--body-bg)',
         border: '2px solid var(--line)',
-        boxShadow: '6px 6px 0 rgba(201,255,77,0.9)',
+        boxShadow: '6px 6px 0 var(--accent-shadow)',
       }}
       className="rounded-2xl p-6 relative"
     >
@@ -340,10 +340,10 @@ function WorkItem({
       <div
         className="absolute left-0 top-0 w-10 h-10 rounded-xl flex items-center justify-center"
         style={{
-          background: 'var(--bg)',
+          background: 'var(--body-bg)',
           border: '2px solid var(--line)',
           color: 'var(--accent)',
-          boxShadow: '3px 3px 0 rgba(201,255,77,0.9)',
+          boxShadow: '3px 3px 0 var(--accent-shadow)',
         }}
       >
         {icon}
@@ -386,9 +386,9 @@ function TestimonialCard({
       variants={itemVariant}
       style={{
         rotate: `${rotate}deg`,
-        background: 'var(--bg)',
+        background: 'var(--body-bg)',
         border: '2px solid var(--line)',
-        boxShadow: '6px 6px 0 rgba(201,255,77,0.9)',
+        boxShadow: '6px 6px 0 var(--accent-shadow)',
       }}
       className="rounded-2xl p-7 sm:p-8 relative flex-1 min-w-0 sm:max-w-md"
     >
@@ -424,7 +424,7 @@ export function About() {
     <section
       id="about"
       className="relative py-24 sm:py-28 md:py-36 overflow-hidden"
-      style={{ background: 'var(--bg)' }}
+      style={{ background: 'var(--section-bg)' }}
       aria-labelledby="about-heading"
     >
       <FloatingParticles />
@@ -433,8 +433,8 @@ export function About() {
       <div
         className="absolute inset-0 opacity-[0.03] pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(255,255,255,0.15) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(var(--grid-line) 1px, transparent 1px),
+                           linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
         }}
       />
@@ -449,7 +449,7 @@ export function About() {
           transform: 'translateX(-50%) rotate(-4deg)',
           fontSize: 'clamp(4rem, 18vw, 14rem)',
           color: 'transparent',
-          WebkitTextStroke: '1.5px rgba(255,255,255,0.06)',
+          WebkitTextStroke: '1.5px var(--watermark-stroke)',
           zIndex: 0,
         }}
       >
@@ -468,8 +468,8 @@ export function About() {
             variants={itemVariant}
             className="font-mono-ui inline-flex items-center gap-2 px-4 py-2 rounded-full border text-xs uppercase tracking-wider mb-8"
             style={{
-              background: 'rgba(201,255,77,0.08)',
-              borderColor: 'rgba(201,255,77,0.3)',
+              background: 'var(--accent-soft)',
+              borderColor: 'var(--accent-ring)',
               color: 'var(--accent)',
               rotate: '-2deg',
             }}
@@ -485,10 +485,7 @@ export function About() {
             className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-[1.02] max-w-3xl"
           >
             <span className="text-[color:var(--ink)]">About </span>
-            <span
-              className="relative inline-block px-2"
-
-            >
+            <span className="relative inline-block px-2 text-[color:var(--button-fg)]">
               <span
                 className="absolute inset-0 -z-10 rounded-lg"
                 style={{ background: 'var(--accent)', transform: 'rotate(-2deg)' }}
@@ -541,7 +538,7 @@ export function About() {
                 style={{
                   rotate: `${s.rotate}deg`,
                   border: '2px dashed var(--line)',
-                  background: 'rgba(255,255,255,0.02)',
+                  background: 'var(--accent-soft)',
                 }}
                 className="rounded-xl px-5 py-3 text-center"
               >
@@ -610,9 +607,9 @@ export function About() {
             variants={itemVariant}
             style={{
               rotate: '-1deg',
-              background: 'var(--bg)',
+              background: 'var(--body-bg)',
               // border: '2px solid var(--line)',
-              // boxShadow: '6px 6px 0 rgba(201,255,77,0.9)',
+              // boxShadow: '6px 6px 0 var(--accent-shadow)',
             }}
             className="rounded-2xl p-7 sm:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6"
           >
@@ -621,7 +618,7 @@ export function About() {
             <motion.a
               href="#contact"
               className="font-heading inline-flex items-center gap-2 px-6 py-3 rounded-full font-semibold text-sm relative overflow-hidden group"
-              style={{ background: 'var(--accent)', color: '#0a0a0a', rotate: '-1deg' }}
+              style={{ background: 'var(--accent)', color: 'var(--button-fg)', rotate: '-1deg' }}
               whileHover={{ scale: 1.04, rotate: 0 }}
               whileTap={{ scale: 0.97 }}
             >
