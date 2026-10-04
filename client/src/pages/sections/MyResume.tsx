@@ -222,7 +222,6 @@ function ResumeButton() {
   return (
     <motion.a
       href={RESUME.url}
-      download={RESUME.filename}
       target="_blank"
       rel="noopener noreferrer"
       variants={itemVariant}

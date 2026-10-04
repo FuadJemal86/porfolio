@@ -83,7 +83,6 @@ export function Hero() {
       <div className="flex flex-wrap gap-2.5">
         <a
           href={RESUME.url}
-          download={RESUME.filename}
           target="_blank"
           rel="noopener noreferrer"
           className="btn-solid"
