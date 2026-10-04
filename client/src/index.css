@@ -13,7 +13,7 @@
   --muted: color-mix(in srgb, var(--text-color) 72%, var(--body-bg));
   --accent-soft: color-mix(in srgb, var(--button-bg) 14%, transparent);
   --overlay: color-mix(in srgb, #141717 85%, transparent);
-  --card-border: color-mix(in srgb, var(--text-color) 12%, transparent);
+  --card-border: color-mix(in srgb, var(--text-color) 14%, transparent);
   --grid-dot: color-mix(in srgb, var(--text-color) 8%, transparent);
 
   --bg: var(--body-bg);
@@ -34,7 +34,7 @@
   --muted: color-mix(in srgb, var(--text-color) 90%, #000000);
   --accent-soft: color-mix(in srgb, var(--button-bg) 10%, transparent);
   --overlay: color-mix(in srgb, #141717 72%, transparent);
-  --card-border: color-mix(in srgb, var(--text-color) 18%, transparent);
+  --card-border: color-mix(in srgb, var(--text-color) 22%, transparent);
   --grid-dot: color-mix(in srgb, var(--text-color) 12%, transparent);
 }
 
@@ -54,11 +54,6 @@ body {
   margin: 0;
   font-family: 'DM Sans', system-ui, sans-serif;
   overflow-x: hidden;
-  border-top: 1px solid var(--card-border);
-  border-left: 1px solid var(--card-border);
-  border-right: 1px solid var(--card-border);
-  border-bottom: none;
-  box-sizing: border-box;
 }
 
 .font-mono-ui {
@@ -91,7 +86,7 @@ body {
   margin-inline: auto;
   background: var(--section-bg);
   border: 1px solid var(--card-border);
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: clip;
 }
 
