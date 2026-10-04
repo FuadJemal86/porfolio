@@ -72,17 +72,48 @@ body {
 
 /* Outer page atmosphere */
 .page-shell {
+  position: relative;
   min-height: 100vh;
   background-color: var(--body-bg);
   background-image:
     radial-gradient(var(--grid-dot) 1px, transparent 1px);
   background-size: 22px 22px;
   padding: 1.25rem;
+  box-sizing: border-box;
+}
+
+/* Vertical lines outside the content card (page rails) */
+.page-shell::before,
+.page-shell::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: color-mix(in srgb, var(--text-color) 28%, transparent);
+  z-index: 40;
+  pointer-events: none;
+}
+
+.page-shell::before {
+  left: 0.75rem;
+}
+
+.page-shell::after {
+  right: 0.75rem;
 }
 
 @media (min-width: 768px) {
   .page-shell {
     padding: 2rem 1.5rem 3rem;
+  }
+
+  .page-shell::before {
+    left: 1.25rem;
+  }
+
+  .page-shell::after {
+    right: 1.25rem;
   }
 }
 
