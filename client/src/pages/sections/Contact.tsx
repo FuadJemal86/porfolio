@@ -109,7 +109,7 @@ export function Contact() {
   };
 
   const inputClass =
-    'w-full rounded-xl px-3.5 py-2.5 text-sm outline-none bg-[color:var(--body-bg)] border border-[color:var(--card-border)] text-[color:var(--text-color)] placeholder:text-[color:var(--muted)] focus:border-[color:var(--button-bg)] transition-colors';
+    'w-full rounded-none px-3.5 py-2.5 text-sm outline-none bg-[color:var(--body-bg)] border border-[color:var(--card-border)] text-[color:var(--text-color)] placeholder:text-[color:var(--muted)] focus:border-[color:var(--button-bg)] transition-colors';
 
   return (
     <footer id="contact" className="border-t border-[color:var(--card-border)] pt-10 mt-2">
@@ -168,7 +168,7 @@ export function Contact() {
           </p>
         )}
 
-        <button type="submit" disabled={sending} className="btn-solid disabled:opacity-60">
+        <button type="submit" disabled={sending} className="btn-solid !rounded-none disabled:opacity-60">
           {sending ? 'Sending…' : 'Send message'}
         </button>
       </form>
@@ -180,7 +180,7 @@ export function Contact() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="icon-btn"
+            className="icon-btn !rounded-none"
           >
             <Github className="w-3.5 h-3.5" />
           </a>
@@ -189,7 +189,7 @@ export function Contact() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="icon-btn"
+            className="icon-btn !rounded-none"
           >
             <Linkedin className="w-3.5 h-3.5" />
           </a>
@@ -198,7 +198,7 @@ export function Contact() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="X"
-            className="icon-btn"
+            className="icon-btn !rounded-none"
           >
             <Twitter className="w-3.5 h-3.5" />
           </a>
