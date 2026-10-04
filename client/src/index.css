@@ -54,6 +54,11 @@ body {
   margin: 0;
   font-family: 'DM Sans', system-ui, sans-serif;
   overflow-x: hidden;
+  border-top: 1px solid var(--card-border);
+  border-left: 1px solid var(--card-border);
+  border-right: 1px solid var(--card-border);
+  border-bottom: none;
+  box-sizing: border-box;
 }
 
 .font-mono-ui {
