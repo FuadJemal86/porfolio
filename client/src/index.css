@@ -72,9 +72,8 @@ body {
 
 /* Outer page atmosphere */
 .page-shell {
-  --frame-inset: 0.75rem;
-  --frame-corner: 1.25rem;
-  --frame-line: color-mix(in srgb, var(--text-color) 28%, transparent);
+  --frame-bar: 0.7rem;
+  --frame-radius: 20px;
 
   position: relative;
   min-height: 100vh;
@@ -82,53 +81,34 @@ body {
   background-image:
     radial-gradient(var(--grid-dot) 1px, transparent 1px);
   background-size: 22px 22px;
-  padding: 1.25rem;
+  padding: calc(var(--frame-bar) + 1rem) 1.25rem 1.25rem;
   box-sizing: border-box;
 }
 
 @media (min-width: 768px) {
   .page-shell {
-    --frame-inset: 1.25rem;
-    --frame-corner: 1.75rem;
-    padding: 2rem 1.5rem 3rem;
+    --frame-bar: 0.85rem;
+    padding: calc(var(--frame-bar) + 1.25rem) 1.5rem 2.5rem;
   }
 }
 
-/* Frame lines outside content — gaps at corners via margin */
+/* Top horizontal bar — end to end, content bg */
 .page-frame {
   position: fixed;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
   z-index: 40;
   pointer-events: none;
 }
 
-.page-frame-top,
-.page-frame-left,
-.page-frame-right {
-  position: absolute;
-  background: var(--frame-line);
-}
-
 .page-frame-top {
-  top: var(--frame-inset);
-  left: calc(var(--frame-inset) + var(--frame-corner));
-  right: calc(var(--frame-inset) + var(--frame-corner));
-  height: 1px;
-}
-
-.page-frame-left,
-.page-frame-right {
-  top: calc(var(--frame-inset) + var(--frame-corner));
-  bottom: calc(var(--frame-inset) + var(--frame-corner));
-  width: 1px;
-}
-
-.page-frame-left {
-  left: var(--frame-inset);
-}
-
-.page-frame-right {
-  right: var(--frame-inset);
+  display: block;
+  width: 100%;
+  height: var(--frame-bar);
+  background: var(--section-bg);
+  border-bottom: 1px solid var(--card-border);
+  box-sizing: border-box;
 }
 
 /* Ideaspark-style bordered content column */

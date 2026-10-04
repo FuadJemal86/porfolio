@@ -6,11 +6,9 @@ import { ThemeToggle } from '../components/ThemeToggle'
 export function PortfolioPage() {
   return (
     <div className="page-shell text-[color:var(--text-color)] antialiased">
-      {/* Outer frame lines — outside content, with corner gaps */}
+      {/* Top horizontal bar — end to end */}
       <div className="page-frame" aria-hidden="true">
         <span className="page-frame-top" />
-        <span className="page-frame-left" />
-        <span className="page-frame-right" />
       </div>
 
       <div className="site-card">
