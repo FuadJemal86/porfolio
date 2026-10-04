@@ -24,6 +24,8 @@ export type PortfolioProject = {
   shortDescription: string;
   fullDescription: string;
   imageAlt: string;
+  /** Filename fragment used as the public card preview (matched against image path) */
+  coverFile?: string;
   technologies?: string[];
   liveUrl?: string;
   githubUrl?: string;
@@ -49,6 +51,7 @@ export const projects: PortfolioProject[] = [
     fullDescription:
       'LissanAI is a mobile keyboard built for an underserved problem: Ethiopian languages — especially Amharic — have weak support in mainstream typing and voice tools. It offers multi-language voice-to-text (English, Amharic, Arabic) with phonetic Amharic transliteration, a native Fidel/Ge\'ez phonetic typing engine with live variant suggestions, deep visual keyboard customization with live preview, a community marketplace for sharing designs, and a system-wide floating mic for dictation into any app. Technically it combines Flutter, a Node.js/Express + PostgreSQL (Prisma) backend, a native Android IME in Kotlin, multi-provider AI routing (Groq, OpenAI, Gemini) tuned per language after real accuracy testing, and a custom VAD/audio pipeline for noisy real-world conditions. The goal is closing a digital accessibility gap for tens of millions of speakers while staying a globally usable, customizable keyboard.',
     imageAlt: 'LissanAI keyboard app screenshot',
+    coverFile: 'lssan.png',
     technologies: [
       'Flutter',
       'Kotlin',
@@ -226,4 +229,18 @@ for (const [path, url] of Object.entries(imagesModules)) {
 
 for (const folder of projectFolders) {
   imagesByFolder[folder].sort();
+}
+
+/** Prefer an explicit cover file as the first (public) image for a project. */
+export function getProjectImages(project: PortfolioProject): string[] {
+  const images = imagesByFolder[project.folder] ?? [];
+  if (!project.coverFile || images.length === 0) return images;
+
+  const cover = images.find((url) => url.includes(project.coverFile!));
+  if (!cover) return images;
+  return [cover, ...images.filter((url) => url !== cover)];
+}
+
+export function getProjectPreview(project: PortfolioProject): string | null {
+  return getProjectImages(project)[0] ?? null;
 }

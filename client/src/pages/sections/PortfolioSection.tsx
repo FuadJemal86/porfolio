@@ -1,6 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ArrowUpRight, ExternalLink, FolderOpen, Github, X } from 'lucide-react';
-import { imagesByFolder, projects, type PortfolioProject, type ProjectFolder } from '../../data/projects';
+import {
+  getProjectImages,
+  getProjectPreview,
+  projects,
+  type PortfolioProject,
+  type ProjectFolder,
+} from '../../data/projects';
 
 function ProjectCard({
   project,
@@ -219,9 +225,9 @@ export function PortfolioSection() {
   );
 
   const activeImages = useMemo(() => {
-    if (!activeFolder) return [];
-    return imagesByFolder[activeFolder] ?? [];
-  }, [activeFolder]);
+    if (!activeProject) return [];
+    return getProjectImages(activeProject);
+  }, [activeProject]);
 
   useEffect(() => {
     if (!activeFolder) return;
@@ -243,7 +249,7 @@ export function PortfolioSection() {
         <ProjectCard
           key={project.folder}
           project={project}
-          preview={imagesByFolder[project.folder]?.[0] ?? null}
+          preview={getProjectPreview(project)}
           onOpen={() => setActiveFolder(project.folder)}
         />
       ))}
