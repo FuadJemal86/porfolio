@@ -73,7 +73,6 @@ body {
 /* Outer page atmosphere */
 .page-shell {
   --frame-bar: 0.7rem;
-  --frame-radius: 20px;
 
   position: relative;
   min-height: 100vh;
@@ -117,7 +116,7 @@ body {
   margin-inline: auto;
   background: var(--section-bg);
   border: 1px solid var(--card-border);
-  border-radius: 20px;
+  border-radius: 0;
   overflow: clip;
 }
 
