@@ -22,7 +22,7 @@ function ProjectCard({
       <button
         type="button"
         onClick={onOpen}
-        className="group relative block w-full overflow-hidden rounded-xl border border-[color:var(--card-border)] bg-[color:var(--body-bg)] aspect-[16/10] text-left"
+        className="group relative block w-full overflow-hidden border border-[color:var(--card-border)] bg-[color:var(--body-bg)] aspect-[16/10] text-left"
       >
         {preview ? (
           <img
@@ -58,7 +58,7 @@ function ProjectCard({
         {project.technologies && project.technologies.length > 0 && (
           <ul className="flex flex-wrap gap-1.5 mb-4">
             {project.technologies.slice(0, 4).map((tech) => (
-              <li key={tech} className="pill !text-[11px] !py-1 !px-2.5">
+              <li key={tech} className="pill !rounded-none !text-[11px] !py-1 !px-2.5">
                 {tech}
               </li>
             ))}
@@ -73,7 +73,7 @@ function ProjectCard({
                   href={project.liveUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-ghost !py-1.5 !px-3 !text-[12px]"
+                  className="btn-ghost !rounded-none !py-1.5 !px-3 !text-[12px]"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   Site
@@ -84,7 +84,7 @@ function ProjectCard({
                   href={project.githubUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-ghost !py-1.5 !px-3 !text-[12px]"
+                  className="btn-ghost !rounded-none !py-1.5 !px-3 !text-[12px]"
                 >
                   <Github className="w-3.5 h-3.5" />
                   Code
@@ -92,7 +92,7 @@ function ProjectCard({
               )}
             </>
           ) : (
-            <button type="button" onClick={onOpen} className="btn-ghost !py-1.5 !px-3 !text-[12px]">
+            <button type="button" onClick={onOpen} className="btn-ghost !rounded-none !py-1.5 !px-3 !text-[12px]">
               Details
             </button>
           )}
@@ -128,7 +128,7 @@ function ProjectModal({
       onClick={onClose}
     >
       <div
-        className="w-full sm:max-w-3xl max-h-[90vh] overflow-y-auto bg-[color:var(--section-bg)] border border-[color:var(--card-border)] sm:rounded-2xl"
+        className="w-full sm:max-w-3xl max-h-[90vh] overflow-y-auto bg-[color:var(--section-bg)] border border-[color:var(--card-border)]"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="sticky top-0 z-10 flex items-start justify-between gap-4 px-5 py-4 sm:px-6 border-b border-[color:var(--card-border)] bg-[color:var(--section-bg)]">
@@ -142,7 +142,7 @@ function ProjectModal({
 
         <div className="p-5 sm:p-6 space-y-5">
           {mainImage && (
-            <div className="rounded-xl border border-[color:var(--card-border)] overflow-hidden bg-[color:var(--body-bg)]">
+            <div className="border border-[color:var(--card-border)] overflow-hidden bg-[color:var(--body-bg)]">
               <img
                 src={mainImage}
                 alt={project.imageAlt}
@@ -159,7 +159,7 @@ function ProjectModal({
                   type="button"
                   onClick={() => setActiveIndex(idx)}
                   aria-label={`Image ${idx + 1}`}
-                  className="shrink-0 w-16 h-16 overflow-hidden rounded-lg border"
+                  className="shrink-0 w-16 h-16 overflow-hidden border"
                   style={{
                     borderColor: idx === activeIndex ? 'var(--button-bg)' : 'var(--card-border)',
                   }}
@@ -177,7 +177,7 @@ function ProjectModal({
           {project.technologies && project.technologies.length > 0 && (
             <ul className="flex flex-wrap gap-1.5">
               {project.technologies.map((tech) => (
-                <li key={tech} className="pill !text-[11px]">
+                <li key={tech} className="pill !rounded-none !text-[11px]">
                   {tech}
                 </li>
               ))}
