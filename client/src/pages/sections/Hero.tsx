@@ -1,6 +1,7 @@
-import { Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { Download, Github, Linkedin, Mail, Twitter } from 'lucide-react';
 import fuadpp from '../image/fuadpp.jpg';
 import { SOCIAL } from '../../constants/social';
+import { RESUME } from '../../constants/resume';
 
 const tags = [
   'Full Stack',
@@ -80,7 +81,17 @@ export function Hero() {
       </div>
 
       <div className="flex flex-wrap gap-2.5">
-        <a href="#work" className="btn-solid">
+        <a
+          href={RESUME.url}
+          download={RESUME.filename}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-solid"
+        >
+          <Download className="w-4 h-4" />
+          Download Resume
+        </a>
+        <a href="#work" className="btn-ghost">
           View my work
         </a>
         <a href="#contact" className="btn-ghost">

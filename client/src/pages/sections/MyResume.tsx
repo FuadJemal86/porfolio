@@ -1,5 +1,6 @@
 import { motion, type Variants } from 'framer-motion';
 import { Award, Download, FileText } from 'lucide-react';
+import { RESUME } from '../../constants/resume';
 
 /* -----------------------------------------------------------------
    Static data
@@ -220,7 +221,10 @@ function TornDivider() {
 function ResumeButton() {
   return (
     <motion.a
-      href="#"
+      href={RESUME.url}
+      download={RESUME.filename}
+      target="_blank"
+      rel="noopener noreferrer"
       variants={itemVariant}
       whileHover={{ scale: 1.04, rotate: 0 }}
       whileTap={{ scale: 0.97 }}
