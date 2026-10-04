@@ -174,33 +174,33 @@ export function Contact() {
       </form>
 
       <div className="mt-10 pt-6 border-t border-[color:var(--card-border)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px]">
+        <div className="flex items-center gap-3">
           <a
             href={SOCIAL.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[color:var(--muted)] hover:text-[color:var(--text-color)]"
+            aria-label="GitHub"
+            className="icon-btn"
           >
             <Github className="w-3.5 h-3.5" />
-            GitHub
           </a>
           <a
             href={SOCIAL.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[color:var(--muted)] hover:text-[color:var(--text-color)]"
+            aria-label="LinkedIn"
+            className="icon-btn"
           >
             <Linkedin className="w-3.5 h-3.5" />
-            LinkedIn
           </a>
           <a
             href={SOCIAL.x}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-[color:var(--muted)] hover:text-[color:var(--text-color)]"
+            aria-label="X"
+            className="icon-btn"
           >
             <Twitter className="w-3.5 h-3.5" />
-            X
           </a>
         </div>
         <p className="text-[12px] text-[color:var(--muted)]">
