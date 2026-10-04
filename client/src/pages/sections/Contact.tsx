@@ -120,42 +120,13 @@ export function Contact() {
         Have a project in mind? Send a note — or reach me directly.
       </p>
 
-      <div className="flex flex-wrap gap-x-4 gap-y-2 mb-8 text-[13px]">
-        <a
-          href="mailto:fuad.jemal.mail@gmail.com"
-          className="inline-flex items-center gap-1.5 text-[color:var(--muted)] hover:text-[color:var(--text-color)]"
-        >
-          <Mail className="w-3.5 h-3.5" />
-          fuad.jemal.mail@gmail.com
-        </a>
-        <a
-          href={SOCIAL.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-[color:var(--muted)] hover:text-[color:var(--text-color)]"
-        >
-          <Github className="w-3.5 h-3.5" />
-          GitHub
-        </a>
-        <a
-          href={SOCIAL.linkedin}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-[color:var(--muted)] hover:text-[color:var(--text-color)]"
-        >
-          <Linkedin className="w-3.5 h-3.5" />
-          LinkedIn
-        </a>
-        <a
-          href={SOCIAL.x}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-[color:var(--muted)] hover:text-[color:var(--text-color)]"
-        >
-          <Twitter className="w-3.5 h-3.5" />
-          X
-        </a>
-      </div>
+      <a
+        href="mailto:fuad.jemal.mail@gmail.com"
+        className="inline-flex items-center gap-1.5 text-[13px] text-[color:var(--muted)] hover:text-[color:var(--text-color)] mb-8"
+      >
+        <Mail className="w-3.5 h-3.5" />
+        fuad.jemal.mail@gmail.com
+      </a>
 
       <form className="space-y-3 max-w-xl" onSubmit={onSubmit}>
         <div className="grid gap-3 sm:grid-cols-2">
@@ -202,9 +173,40 @@ export function Contact() {
         </button>
       </form>
 
-      <p className="mt-10 pt-6 border-t border-[color:var(--card-border)] text-[12px] text-[color:var(--muted)]">
-        © {new Date().getFullYear()} Fuad Jemal
-      </p>
+      <div className="mt-10 pt-6 border-t border-[color:var(--card-border)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px]">
+          <a
+            href={SOCIAL.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-[color:var(--muted)] hover:text-[color:var(--text-color)]"
+          >
+            <Github className="w-3.5 h-3.5" />
+            GitHub
+          </a>
+          <a
+            href={SOCIAL.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-[color:var(--muted)] hover:text-[color:var(--text-color)]"
+          >
+            <Linkedin className="w-3.5 h-3.5" />
+            LinkedIn
+          </a>
+          <a
+            href={SOCIAL.x}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-[color:var(--muted)] hover:text-[color:var(--text-color)]"
+          >
+            <Twitter className="w-3.5 h-3.5" />
+            X
+          </a>
+        </div>
+        <p className="text-[12px] text-[color:var(--muted)]">
+          © {new Date().getFullYear()} Fuad Jemal
+        </p>
+      </div>
     </footer>
   );
 }
