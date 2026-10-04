@@ -68,8 +68,7 @@ export function Hero() {
       </div>
 
       <p className="text-[color:var(--muted)] text-[15px] sm:text-base leading-relaxed max-w-2xl mb-5">
-        Full Stack Developer based in Addis Ababa. I build scalable web apps, mobile products,
-        and real-world systems with Django and the MERN stack — shipping fast without cutting corners.
+      Full Stack Developer building websites, mobile apps, and SaaS products with Django and the MERN stack. I move fast without cutting corners, and I'm open to freelance projects.
       </p>
 
       <div className="flex flex-wrap gap-2 mb-6">
