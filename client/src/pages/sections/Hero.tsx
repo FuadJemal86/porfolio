@@ -40,7 +40,7 @@ export function Hero() {
         <img
           src={fuadpp}
           alt="Fuad Jemal"
-          className="w-16 h-16 sm:w-[72px] sm:h-[72px] rounded-xl object-cover grayscale shrink-0 border border-[color:var(--card-border)]"
+          className="w-20 h-24 sm:w-24 sm:h-[7.25rem] object-cover shrink-0 border border-[color:var(--card-border)]"
         />
         <div className="min-w-0 pt-0.5">
           <h1 className="font-heading text-[1.75rem] sm:text-[2.15rem] font-bold tracking-tight leading-none mb-2.5">
