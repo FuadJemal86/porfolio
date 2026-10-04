@@ -45,12 +45,12 @@ const mobTech = ['Flutter', 'Node.js', 'Postgres'] as const;
 export const projects: PortfolioProject[] = [
   {
     folder: 'lssanAI',
-    title: 'LissanAI',
+    title: 'LssanAI',
     shortDescription:
       'AI-powered custom keyboard for Ethiopian languages — Amharic voice-to-text, Fidel typing, and deep visual customization.',
     fullDescription:
-      'LissanAI is a mobile keyboard built for an underserved problem: Ethiopian languages — especially Amharic — have weak support in mainstream typing and voice tools. It offers multi-language voice-to-text (English, Amharic, Arabic) with phonetic Amharic transliteration, a native Fidel/Ge\'ez phonetic typing engine with live variant suggestions, deep visual keyboard customization with live preview, a community marketplace for sharing designs, and a system-wide floating mic for dictation into any app. Technically it combines Flutter, a Node.js/Express + PostgreSQL (Prisma) backend, a native Android IME in Kotlin, multi-provider AI routing (Groq, OpenAI, Gemini) tuned per language after real accuracy testing, and a custom VAD/audio pipeline for noisy real-world conditions. The goal is closing a digital accessibility gap for tens of millions of speakers while staying a globally usable, customizable keyboard.',
-    imageAlt: 'LissanAI keyboard app screenshot',
+      'LssanAI is a mobile keyboard built for an underserved problem: Ethiopian languages — especially Amharic — have weak support in mainstream typing and voice tools. It offers multi-language voice-to-text (English, Amharic, Arabic) with phonetic Amharic transliteration, a native Fidel/Ge\'ez phonetic typing engine with live variant suggestions, deep visual keyboard customization with live preview, a community marketplace for sharing designs, and a system-wide floating mic for dictation into any app. Technically it combines Flutter, a Node.js/Express + PostgreSQL (Prisma) backend, a native Android IME in Kotlin, multi-provider AI routing (Groq, OpenAI, Gemini) tuned per language after real accuracy testing, and a custom VAD/audio pipeline for noisy real-world conditions. The goal is closing a digital accessibility gap for tens of millions of speakers while staying a globally usable, customizable keyboard.',
+    imageAlt: 'LssanAI keyboard app screenshot',
     coverFile: 'lssan.png',
     technologies: [
       'Flutter',
