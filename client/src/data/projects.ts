@@ -109,39 +109,12 @@ export const projects: PortfolioProject[] = [
     technologies: [...defaultStack],
   },
   {
-    folder: 'apm',
-    title: 'A.P.M',
-    shortDescription: 'Anonymous private messaging mobile app — share a Private ID, receive messages privately.',
+    folder: 'pm',
+    title: 'Property Management',
+    shortDescription: 'Agent-based SaaS connecting property owners and tenants for leases and ops.',
     fullDescription:
-      'You can share your Private ID, and people can see the anonymous messages you received without screenshots or any extra process.',
-    imageAlt: 'A.P.M mobile app screenshot',
-    technologies: [...mobTech],
-  },
-  {
-    folder: 'EmployeeManegment',
-    title: 'Employee Management',
-    shortDescription: 'HR operations: clock in/out, calendar tasks, progress tracking, and payroll.',
-    fullDescription:
-      'A workforce portal for clock-in and clock-out, assigning tasks with calendar-based scheduling, monitoring progress over time, and supporting payroll workflows. It keeps managers and staff aligned on who is working on what and how work is advancing.',
-    imageAlt: 'Employee Management project screenshot',
-    technologies: [...defaultStack],
-  },
-  {
-    folder: 'family',
-    title: 'Locality',
-    shortDescription: 'Locality-based family platform for registration, members, and community services.',
-    fullDescription:
-      'Locality is a locality-based family management platform. It simplifies family registration, tracks members, and connects users to community services — bringing administrative work into one coherent, accessible web experience.',
-    imageAlt: 'Locality family platform screenshot',
-    technologies: [...defaultStack],
-  },
-  {
-    folder: 'hikma',
-    title: 'Hikma University',
-    shortDescription: 'Islamic university website — multilingual content, institutional story, and donations.',
-    fullDescription:
-      "A web platform for Hikma Islamic University that presents programs, values, and campus life. Content is available in three languages, and the site includes a donation flow so supporters can contribute to the university's mission directly online.",
-    imageAlt: 'Hikma University project screenshot',
+      'A property management SaaS built around agents who bridge owners and tenants. It supports day-to-day rental operations, clear roles for each party, and a workflow that keeps listings, tenants, and ownership aligned in one system.',
+    imageAlt: 'Property management system screenshot',
     technologies: [...defaultStack],
   },
   {
@@ -154,12 +127,30 @@ export const projects: PortfolioProject[] = [
     technologies: [...defaultStack],
   },
   {
-    folder: 'jejan',
-    title: 'Jejan',
-    shortDescription: 'E-commerce linking customers and suppliers for listings, orders, and exchanges.',
+    folder: 'apm',
+    title: 'A.P.M',
+    shortDescription: 'Anonymous private messaging mobile app — share a Private ID, receive messages privately.',
     fullDescription:
-      'Jejan is an e-commerce platform that connects customers with suppliers. It supports seamless online transactions, product discovery, and exchanges so both sides can trade efficiently through a single, modern marketplace experience.',
-    imageAlt: 'Jejan e-commerce project screenshot',
+      'You can share your Private ID, and people can see the anonymous messages you received without screenshots or any extra process.',
+    imageAlt: 'A.P.M mobile app screenshot',
+    technologies: [...mobTech],
+  },
+  {
+    folder: 'hikma',
+    title: 'Hikma University',
+    shortDescription: 'Islamic university website — multilingual content, institutional story, and donations.',
+    fullDescription:
+      "A web platform for Hikma Islamic University that presents programs, values, and campus life. Content is available in three languages, and the site includes a donation flow so supporters can contribute to the university's mission directly online.",
+    imageAlt: 'Hikma University project screenshot',
+    technologies: [...defaultStack],
+  },
+  {
+    folder: 'EmployeeManegment',
+    title: 'Employee Management',
+    shortDescription: 'HR operations: clock in/out, calendar tasks, progress tracking, and payroll.',
+    fullDescription:
+      'A workforce portal for clock-in and clock-out, assigning tasks with calendar-based scheduling, monitoring progress over time, and supporting payroll workflows. It keeps managers and staff aligned on who is working on what and how work is advancing.',
+    imageAlt: 'Employee Management project screenshot',
     technologies: [...defaultStack],
   },
   {
@@ -171,6 +162,16 @@ export const projects: PortfolioProject[] = [
     imageAlt: 'KPI Assign project screenshot',
     technologies: [...defaultStack],
   },
+  {
+    folder: 'jejan',
+    title: 'Jejan',
+    shortDescription: 'E-commerce linking customers and suppliers for listings, orders, and exchanges.',
+    fullDescription:
+      'Jejan is an e-commerce platform that connects customers with suppliers. It supports seamless online transactions, product discovery, and exchanges so both sides can trade efficiently through a single, modern marketplace experience.',
+    imageAlt: 'Jejan e-commerce project screenshot',
+    technologies: [...defaultStack],
+  },
+
   {
     folder: 'mishkat',
     title: 'Mishkat',
@@ -191,12 +192,12 @@ export const projects: PortfolioProject[] = [
     technologies: [...defaultStack],
   },
   {
-    folder: 'pm',
-    title: 'Property Management',
-    shortDescription: 'Agent-based SaaS connecting property owners and tenants for leases and ops.',
+    folder: 'family',
+    title: 'Locality',
+    shortDescription: 'Locality-based family platform for registration, members, and community services.',
     fullDescription:
-      'A property management SaaS built around agents who bridge owners and tenants. It supports day-to-day rental operations, clear roles for each party, and a workflow that keeps listings, tenants, and ownership aligned in one system.',
-    imageAlt: 'Property management system screenshot',
+      'Locality is a locality-based family management platform. It simplifies family registration, tracks members, and connects users to community services — bringing administrative work into one coherent, accessible web experience.',
+    imageAlt: 'Locality family platform screenshot',
     technologies: [...defaultStack],
   },
 ];
