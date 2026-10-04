@@ -72,6 +72,10 @@ body {
 
 /* Outer page atmosphere */
 .page-shell {
+  --frame-inset: 0.75rem;
+  --frame-corner: 1.25rem;
+  --frame-line: color-mix(in srgb, var(--text-color) 28%, transparent);
+
   position: relative;
   min-height: 100vh;
   background-color: var(--body-bg);
@@ -82,39 +86,49 @@ body {
   box-sizing: border-box;
 }
 
-/* Vertical lines outside the content card (page rails) */
-.page-shell::before,
-.page-shell::after {
-  content: '';
+@media (min-width: 768px) {
+  .page-shell {
+    --frame-inset: 1.25rem;
+    --frame-corner: 1.75rem;
+    padding: 2rem 1.5rem 3rem;
+  }
+}
+
+/* Frame lines outside content — gaps at corners via margin */
+.page-frame {
   position: fixed;
-  top: 0;
-  bottom: 0;
-  width: 1px;
-  background: color-mix(in srgb, var(--text-color) 28%, transparent);
+  inset: 0;
   z-index: 40;
   pointer-events: none;
 }
 
-.page-shell::before {
-  left: 0.75rem;
+.page-frame-top,
+.page-frame-left,
+.page-frame-right {
+  position: absolute;
+  background: var(--frame-line);
 }
 
-.page-shell::after {
-  right: 0.75rem;
+.page-frame-top {
+  top: var(--frame-inset);
+  left: calc(var(--frame-inset) + var(--frame-corner));
+  right: calc(var(--frame-inset) + var(--frame-corner));
+  height: 1px;
 }
 
-@media (min-width: 768px) {
-  .page-shell {
-    padding: 2rem 1.5rem 3rem;
-  }
+.page-frame-left,
+.page-frame-right {
+  top: calc(var(--frame-inset) + var(--frame-corner));
+  bottom: calc(var(--frame-inset) + var(--frame-corner));
+  width: 1px;
+}
 
-  .page-shell::before {
-    left: 1.25rem;
-  }
+.page-frame-left {
+  left: var(--frame-inset);
+}
 
-  .page-shell::after {
-    right: 1.25rem;
-  }
+.page-frame-right {
+  right: var(--frame-inset);
 }
 
 /* Ideaspark-style bordered content column */
