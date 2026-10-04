@@ -64,6 +64,12 @@ body {
   font-family: 'Space Grotesk', system-ui, sans-serif;
 }
 
+.profile-photo {
+  filter: none;
+  -webkit-filter: none;
+  opacity: 1;
+}
+
 /* Outer page atmosphere */
 .page-shell {
   min-height: 100vh;
