@@ -73,7 +73,10 @@ export function Hero() {
 
       <div className="flex flex-wrap gap-2 mb-6">
         {tags.map((tag, i) => (
-          <span key={tag} className={i === tags.length - 1 ? 'pill pill-accent' : 'pill'}>
+          <span
+            key={tag}
+            className={i === tags.length - 1 ? 'pill pill-accent !rounded-none' : 'pill !rounded-none'}
+          >
             {tag}
           </span>
         ))}
@@ -84,15 +87,15 @@ export function Hero() {
           href={RESUME.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="btn-solid"
+          className="btn-solid !rounded-none"
         >
           <Download className="w-4 h-4" />
           Download Resume
         </a>
-        <a href="#work" className="btn-ghost">
+        <a href="#work" className="btn-ghost !rounded-none">
           View my work
         </a>
-        <a href="#contact" className="btn-ghost">
+        <a href="#contact" className="btn-ghost !rounded-none">
           Contact me
         </a>
       </div>
