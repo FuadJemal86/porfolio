@@ -1,4 +1,6 @@
 export const projectFolders = [
+  'lissanAI',
+  'ideaSpark',
   'A_sync',
   'alif',
   'aquaErp',
@@ -39,6 +41,42 @@ const defaultStack = [
 const mobTech = ['Flutter', 'Node.js', 'Postgres'] as const;
 
 export const projects: PortfolioProject[] = [
+  {
+    folder: 'lissanAI',
+    title: 'LissanAI',
+    shortDescription:
+      'AI-powered custom keyboard for Ethiopian languages — Amharic voice-to-text, Fidel typing, and deep visual customization.',
+    fullDescription:
+      'LissanAI is a mobile keyboard built for an underserved problem: Ethiopian languages — especially Amharic — have weak support in mainstream typing and voice tools. It offers multi-language voice-to-text (English, Amharic, Arabic) with phonetic Amharic transliteration, a native Fidel/Ge\'ez phonetic typing engine with live variant suggestions, deep visual keyboard customization with live preview, a community marketplace for sharing designs, and a system-wide floating mic for dictation into any app. Technically it combines Flutter, a Node.js/Express + PostgreSQL (Prisma) backend, a native Android IME in Kotlin, multi-provider AI routing (Groq, OpenAI, Gemini) tuned per language after real accuracy testing, and a custom VAD/audio pipeline for noisy real-world conditions. The goal is closing a digital accessibility gap for tens of millions of speakers while staying a globally usable, customizable keyboard.',
+    imageAlt: 'LissanAI keyboard app screenshot',
+    technologies: [
+      'Flutter',
+      'Kotlin',
+      'Node.js',
+      'Express.js',
+      'PostgreSQL',
+      'Prisma',
+      'Gemini',
+      'OpenAI',
+      'Groq',
+    ],
+  },
+  {
+    folder: 'ideaSpark',
+    title: 'IdeaSpark',
+    shortDescription:
+      'Public project-idea platform — post ideas, get feedback, and find collaborators to build them.',
+    fullDescription:
+      'IdeaSpark is a public project-idea platform where people post ideas, get community feedback, and find collaborators — think Product Hunt meets a collaboration board, built lean for v1. Guests can browse the feed, ideas, and comments; signing in unlocks upvote, comment, save, collaborate, and posting. Users manage their profile and posts; admins get full CRUD plus top-posts views. Core loops include category-based idea posting with optional collaborator needs (auto-closes when the team is full), thumbs-up engagement, slide-in comments, bookmarks, share links, and a request-to-collaborate flow with Received/Sent tabs. Discovery uses debounced search and Load More pagination; profiles are public (title, bio, portfolio, location); notifications cover comments, upvotes, and collaboration decisions. The UI is sharp-edged with dark/light themes and a reactive mascot companion. Built with Prisma (UUID models) across the stack.',
+    imageAlt: 'IdeaSpark project idea platform screenshot',
+    technologies: [
+      'React',
+      'TypeScript',
+      'Prisma',
+      'PostgreSQL',
+      'Node.js',
+    ],
+  },
   {
     folder: 'A_sync',
     title: 'A Sync',
