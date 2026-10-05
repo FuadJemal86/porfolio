@@ -26,10 +26,11 @@ function SocialItem({
       href={href}
       target="_blank"
       rel="noopener noreferrer"
+      aria-label={label}
       className="inline-flex items-center gap-1.5 text-[13px] text-[color:var(--muted)] hover:text-[color:var(--text-color)] transition-colors"
     >
       {children}
-      <span>{label}</span>
+      <span className="hidden sm:inline">{label}</span>
     </a>
   );
 }
