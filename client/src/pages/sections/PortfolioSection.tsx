@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { ArrowUpRight, ExternalLink, FolderOpen, Github, X } from 'lucide-react';
+import { ArrowUpRight, ExternalLink, FolderOpen, Github, GraduationCap, X } from 'lucide-react';
 import {
   getProjectImages,
   getProjectPreview,
@@ -253,6 +253,27 @@ export function PortfolioSection() {
           onOpen={() => setActiveFolder(project.folder)}
         />
       ))}
+
+      <div className="mt-12 border border-[color:var(--card-border)] bg-[color:var(--body-bg)] p-6 sm:p-8">
+        <div className="flex items-center gap-3 mb-3">
+          <span className="flex h-10 w-10 items-center justify-center rounded-full border border-[color:var(--card-border)] bg-[color:var(--section-bg)] text-[color:var(--text-color)]">
+            <GraduationCap className="w-5 h-5" />
+          </span>
+          <div>
+            <p className="text-[11px] uppercase tracking-[0.24em] text-[color:var(--muted)]">
+              Education
+            </p>
+            <h3 className="font-heading text-xl sm:text-2xl font-semibold tracking-tight">
+              Jimma University
+            </h3>
+          </div>
+        </div>
+
+        <p className="text-[color:var(--muted)] text-[15px] leading-relaxed">
+          I graduated from Jimma University with a degree in Information Science.
+        </p>
+
+      </div>
 
       {activeProject && (
         <ProjectModal
