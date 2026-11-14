@@ -47,7 +47,7 @@ export function Hero() {
     if (shouldCountVisit) window.sessionStorage.setItem(sessionKey, 'pending');
 
     api.get<{ count: number }>('/visits')
-      .then(async ({ data }) => {
+      .then(async ({ data }: { data: { count: number } }) => {
         if (!shouldCountVisit) {
           setVisits(data.count);
           return;
