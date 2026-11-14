@@ -1,4 +1,5 @@
 import { Download, Eye, Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import api from '../../service/api';
 import fuadpp from '../image/fuadpp.jpg';
@@ -34,6 +35,38 @@ function SocialItem({
       {children}
       <span className="hidden sm:inline">{label}</span>
     </a>
+  );
+}
+
+function RollingCount({ value }: { value: number }) {
+  const formattedValue = value.toLocaleString('en-US');
+
+  return (
+    <span
+      role="img"
+      aria-label={`${formattedValue} visits`}
+      className="inline-flex items-center"
+    >
+      <span className="inline-flex" aria-hidden="true">
+        {Array.from(formattedValue).map((character, index) => (
+          /\d/.test(character) ? (
+            <span key={`${index}-${character}`} className="inline-block h-[1em] overflow-hidden leading-none">
+              <motion.span
+                className="block"
+                initial={{ y: '-100%' }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.35, ease: 'easeOut' }}
+              >
+                {character}
+              </motion.span>
+            </span>
+          ) : (
+            <span key={`${index}-${character}`}>{character}</span>
+          )
+        ))}
+      </span>
+      <span className="ml-1" aria-hidden="true">visits</span>
+    </span>
   );
 }
 
@@ -93,11 +126,10 @@ export function Hero() {
           </div>
           <div
             className="inline-flex items-center gap-1.5 mt-2 text-xs text-[color:var(--muted)]"
-            aria-label={`${visits.toLocaleString()} visits`}
             title="Total portfolio visits"
           >
             <Eye className="w-3.5 h-3.5" aria-hidden="true" />
-            <span>{visits.toLocaleString()} visits</span>
+            <RollingCount value={visits} />
           </div>
         </div>
       </div>
