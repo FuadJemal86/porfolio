@@ -1,5 +1,6 @@
 import { Download, Eye, Github, Linkedin, Mail, Twitter } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import api from '../../service/api';
 import fuadpp from '../image/fuadpp.jpg';
 import { SOCIAL } from '../../constants/social';
 import { RESUME } from '../../constants/resume';
@@ -40,20 +41,25 @@ export function Hero() {
   const [visits, setVisits] = useState(403);
 
   useEffect(() => {
-    const countKey = 'portfolio-visits';
     const sessionKey = 'portfolio-visit-counted';
-    const savedVisits = Number(window.localStorage.getItem(countKey));
-    const currentVisits = Number.isFinite(savedVisits) && savedVisits >= 403 ? savedVisits : 403;
-    const nextVisits = window.sessionStorage.getItem(sessionKey)
-      ? currentVisits
-      : currentVisits + 1;
+    const sessionStatus = window.sessionStorage.getItem(sessionKey);
+    const shouldCountVisit = sessionStatus === null;
+    if (shouldCountVisit) window.sessionStorage.setItem(sessionKey, 'pending');
 
-    if (nextVisits !== currentVisits) {
-      window.localStorage.setItem(countKey, String(nextVisits));
-      window.sessionStorage.setItem(sessionKey, 'true');
-    }
+    api.get<{ count: number }>('/visits')
+      .then(async ({ data }) => {
+        if (!shouldCountVisit) {
+          setVisits(data.count);
+          return;
+        }
 
-    setVisits(nextVisits);
+        const result = await api.post<{ count: number }>('/visits');
+        setVisits(result.data.count);
+        window.sessionStorage.setItem(sessionKey, 'true');
+      })
+      .catch(() => {
+        if (shouldCountVisit) window.sessionStorage.removeItem(sessionKey);
+      });
   }, []);
 
   return (
@@ -70,7 +76,7 @@ export function Hero() {
         <div
           className="inline-flex items-center gap-1.5 pt-1 text-xs text-[color:var(--muted)]"
           aria-label={`${visits.toLocaleString()} visits`}
-          title="Portfolio visits on this browser"
+          title="Total portfolio visits"
         >
           <Eye className="w-3.5 h-3.5" aria-hidden="true" />
           <span>{visits.toLocaleString()} visits</span>
