@@ -1,4 +1,5 @@
-import { Download, Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { Download, Eye, Github, Linkedin, Mail, Twitter } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import fuadpp from '../image/fuadpp.jpg';
 import { SOCIAL } from '../../constants/social';
 import { RESUME } from '../../constants/resume';
@@ -36,6 +37,25 @@ function SocialItem({
 }
 
 export function Hero() {
+  const [visits, setVisits] = useState(403);
+
+  useEffect(() => {
+    const countKey = 'portfolio-visits';
+    const sessionKey = 'portfolio-visit-counted';
+    const savedVisits = Number(window.localStorage.getItem(countKey));
+    const currentVisits = Number.isFinite(savedVisits) && savedVisits >= 403 ? savedVisits : 403;
+    const nextVisits = window.sessionStorage.getItem(sessionKey)
+      ? currentVisits
+      : currentVisits + 1;
+
+    if (nextVisits !== currentVisits) {
+      window.localStorage.setItem(countKey, String(nextVisits));
+      window.sessionStorage.setItem(sessionKey, 'true');
+    }
+
+    setVisits(nextVisits);
+  }, []);
+
   return (
     <section id="home" className="pr-12 sm:pr-14">
       <div className="flex items-start gap-4 sm:gap-5 mb-6">
@@ -47,6 +67,14 @@ export function Hero() {
           decoding="async"
           className="profile-photo w-[5.5rem] h-[6.75rem] sm:w-28 sm:h-[8.5rem] object-cover object-[center_18%] shrink-0 border border-[color:var(--card-border)]"
         />
+        <div
+          className="inline-flex items-center gap-1.5 pt-1 text-xs text-[color:var(--muted)]"
+          aria-label={`${visits.toLocaleString()} visits`}
+          title="Portfolio visits on this browser"
+        >
+          <Eye className="w-3.5 h-3.5" aria-hidden="true" />
+          <span>{visits.toLocaleString()} visits</span>
+        </div>
         <div className="min-w-0 pt-0.5">
           <h1 className="font-heading text-[1.75rem] sm:text-[2.15rem] font-bold tracking-tight leading-none mb-2.5">
             Fuad
