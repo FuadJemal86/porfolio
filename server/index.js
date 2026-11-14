@@ -14,10 +14,10 @@ const allowedOrigins = (process.env.CLIENT_ORIGINS || 'http://localhost:5173')
 
 await mkdir(dataDirectory, { recursive: true });
 
-let visitCount = 403;
+let visitCount = 406;
 try {
   const saved = JSON.parse(await readFile(countFile, 'utf8'));
-  if (Number.isSafeInteger(saved.count) && saved.count >= 403) visitCount = saved.count;
+  if (Number.isSafeInteger(saved.count) && saved.count >= 406) visitCount = saved.count;
 } catch (error) {
   if (error.code !== 'ENOENT') throw error;
 }

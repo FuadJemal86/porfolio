@@ -38,7 +38,7 @@ function SocialItem({
 }
 
 export function Hero() {
-  const [visits, setVisits] = useState(403);
+  const [visits, setVisits] = useState(406);
 
   useEffect(() => {
     const sessionKey = 'portfolio-visit-counted';
