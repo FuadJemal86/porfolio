@@ -73,14 +73,6 @@ export function Hero() {
           decoding="async"
           className="profile-photo w-[5.5rem] h-[6.75rem] sm:w-28 sm:h-[8.5rem] object-cover object-[center_18%] shrink-0 border border-[color:var(--card-border)]"
         />
-        <div
-          className="inline-flex items-center gap-1.5 pt-1 text-xs text-[color:var(--muted)]"
-          aria-label={`${visits.toLocaleString()} visits`}
-          title="Total portfolio visits"
-        >
-          <Eye className="w-3.5 h-3.5" aria-hidden="true" />
-          <span>{visits.toLocaleString()} visits</span>
-        </div>
         <div className="min-w-0 pt-0.5">
           <h1 className="font-heading text-[1.75rem] sm:text-[2.15rem] font-bold tracking-tight leading-none mb-2.5">
             Fuad
@@ -98,6 +90,14 @@ export function Hero() {
             <SocialItem href="mailto:fuad.jemal.mail@gmail.com" label="Email">
               <Mail className="w-3.5 h-3.5" />
             </SocialItem>
+          </div>
+          <div
+            className="inline-flex items-center gap-1.5 mt-2 text-xs text-[color:var(--muted)]"
+            aria-label={`${visits.toLocaleString()} visits`}
+            title="Total portfolio visits"
+          >
+            <Eye className="w-3.5 h-3.5" aria-hidden="true" />
+            <span>{visits.toLocaleString()} visits</span>
           </div>
         </div>
       </div>
