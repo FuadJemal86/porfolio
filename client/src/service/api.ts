@@ -8,11 +8,11 @@ const envPublicOrigin = import.meta.env.VITE_PUBLIC_ORIGIN as string | undefined
 const api = axios.create({
   baseURL:
     envApiBase ??
-    (isDevelopment ? "http://localhost:4000/api" : "/api"),
+    (isDevelopment ? "https://porfolio-dyl3.onrender.com/api" : "/api"),
   withCredentials: true,
 });
 
-const nPoint = envPublicOrigin ?? (isDevelopment ? "http://localhost:4000/" : "/");
+const nPoint = envPublicOrigin ?? (isDevelopment ? "https://porfolio-dyl3.onrender.com" : "/");
 
 export default api;
 export { CanceledError, nPoint };

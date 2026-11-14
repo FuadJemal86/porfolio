@@ -7,7 +7,7 @@ const directory = path.dirname(fileURLToPath(import.meta.url));
 const dataDirectory = process.env.DATA_DIR || path.join(directory, 'data');
 const countFile = path.join(dataDirectory, 'visits.json');
 const port = Number(process.env.PORT) || 4000;
-const allowedOrigins = (process.env.CLIENT_ORIGINS || 'http://localhost:5173')
+const allowedOrigins = (process.env.CLIENT_ORIGINS || 'https://fuadjemal.vercel.app')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
