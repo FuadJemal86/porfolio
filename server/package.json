@@ -9,5 +9,11 @@
   },
   "engines": {
     "node": ">=20"
+  },
+    "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "prisma": "6.12.0"
   }
 }
