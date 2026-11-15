@@ -1,36 +1,12 @@
 import { createServer } from 'node:http';
-import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { PrismaClient } from '@prisma/client';
 
-const directory = path.dirname(fileURLToPath(import.meta.url));
-const dataDirectory = process.env.DATA_DIR || path.join(directory, 'data');
-const countFile = path.join(dataDirectory, 'visits.json');
+const prisma = new PrismaClient();
 const port = Number(process.env.PORT) || 4000;
 const allowedOrigins = (process.env.CLIENT_ORIGINS || 'https://fuadjemal.vercel.app')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
-
-await mkdir(dataDirectory, { recursive: true });
-
-let visitCount = 406;
-try {
-  const saved = JSON.parse(await readFile(countFile, 'utf8'));
-  if (Number.isSafeInteger(saved.count) && saved.count >= 406) visitCount = saved.count;
-} catch (error) {
-  if (error.code !== 'ENOENT') throw error;
-}
-
-let writeQueue = Promise.resolve();
-function saveCount(count) {
-  writeQueue = writeQueue.then(async () => {
-    const temporaryFile = `${countFile}.tmp`;
-    await writeFile(temporaryFile, `${JSON.stringify({ count })}\n`, 'utf8');
-    await rename(temporaryFile, countFile);
-  });
-  return writeQueue;
-}
 
 function sendJson(response, status, payload) {
   response.writeHead(status, {
@@ -38,6 +14,17 @@ function sendJson(response, status, payload) {
     'Cache-Control': 'no-store',
   });
   response.end(JSON.stringify(payload));
+}
+
+async function ensureCountRow() {
+  const existingRow = await prisma.count.findFirst({ orderBy: { id: 'asc' } });
+  if (existingRow) return existingRow;
+
+  return prisma.count.upsert({
+    where: { id: 1 },
+    create: { id: 1, count: 406 },
+    update: {},
+  });
 }
 
 const server = createServer(async (request, response) => {
@@ -58,18 +45,27 @@ const server = createServer(async (request, response) => {
 
   const pathname = new URL(request.url, 'http://localhost').pathname;
   if (pathname === '/api/visits' && request.method === 'GET') {
-    sendJson(response, 200, { count: visitCount });
+    try {
+      const row = await ensureCountRow();
+      sendJson(response, 200, { count: row.count });
+    } catch (error) {
+      console.error('Could not read visit count', error);
+      sendJson(response, 500, { error: 'Could not read visit count' });
+    }
     return;
   }
 
   if (pathname === '/api/visits' && request.method === 'POST') {
-    visitCount += 1;
     try {
-      await saveCount(visitCount);
-      sendJson(response, 200, { count: visitCount });
-    } catch {
-      visitCount -= 1;
-      sendJson(response, 500, { error: 'Could not save visit count' });
+      const countRow = await ensureCountRow();
+      const row = await prisma.count.update({
+        where: { id: countRow.id },
+        data: { count: { increment: 1 } },
+      });
+      sendJson(response, 200, { count: row.count });
+    } catch (error) {
+      console.error('Could not increment visit count', error);
+      sendJson(response, 500, { error: 'Could not increment visit count' });
     }
     return;
   }
@@ -80,3 +76,11 @@ const server = createServer(async (request, response) => {
 server.listen(port, '0.0.0.0', () => {
   console.log(`Visitor counter listening on port ${port}`);
 });
+
+async function shutdown() {
+  server.close();
+  await prisma.$disconnect();
+}
+
+process.on('SIGINT', shutdown);
+process.on('SIGTERM', shutdown);
