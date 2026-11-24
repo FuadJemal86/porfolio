@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 const port = Number(process.env.PORT) || 4000;
-const allowedOrigins = (process.env.CLIENT_ORIGINS || 'https://fuadjemal.vercel.app')
+const allowedOrigins = (process.env.CLIENT_ORIGINS || 'https://ffuad.com')
   .split(',')
   .map((origin) => origin.trim())
   .filter(Boolean);
